@@ -13,6 +13,7 @@ import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getRealmApp} from '../services/realm-config';
 import Realm from 'realm';
+import styles from './styles.js';
 
 export default function Register({navigation}) {
   const myContext = React.useContext(AppContext);

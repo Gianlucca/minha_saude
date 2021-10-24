@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getRealmApp} from '../services/realm-config';
+import {getRealmApp} from '../../services/realm-config';
 import {
   View,
   Image,
@@ -10,19 +10,21 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
+import styles from './styles.js';
 
-export default function AddDocuments({navigation}) {
+export default function AddVaccines({navigation}) {
   const [file, setFile] = useState('');
+  const [name, setName] = useState('');
   const [date, setDate] = useState('');
-  const [title, setTitle] = useState('');
-  const [category, setCategory] = useState('');
+  const [batch, setBatch] = useState('');
+  const [address, setAddress] = useState('');
   const [details, setDetails] = useState('');
   const app = getRealmApp();
 
-  const createDocument = async data => {
-    //create new document
+  const createVaccine = async data => {
+    //create new vaccine
     console.log(data);
-    navigation.navigate('Documents');
+    navigation.navigate('Vaccines');
   };
 
   return (
@@ -30,7 +32,7 @@ export default function AddDocuments({navigation}) {
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
-          <Text>Cadastrar novo Documento</Text>
+          <Text>Cadastrar nova Vacina</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -53,20 +55,43 @@ export default function AddDocuments({navigation}) {
                 marginRight: 15,
                 marginTop: 15,
               }}
-              placeholder="Data do documento"
-              value={date}
-              onChangeText={setDate}
+              placeholder="Nome da Vacina"
+              value={name}
+              onChangeText={setName}
             />
           </View>
-          <TextInput //select
+          <TextInput
             style={{
+              flex: 1,
               marginLeft: 15,
               marginRight: 15,
               marginTop: 15,
             }}
-            placeholder="Categoria Documento"
-            value={category}
-            onChangeText={setCategory}
+            placeholder="Lote"
+            value={batch}
+            onChangeText={setBatch}
+          />
+          <TextInput
+            style={{
+              flex: 1,
+              marginLeft: 15,
+              marginRight: 15,
+              marginTop: 15,
+            }}
+            placeholder="Local"
+            value={address}
+            onChangeText={setAddress}
+          />
+          <TextInput
+            style={{
+              flex: 1,
+              marginLeft: 15,
+              marginRight: 15,
+              marginTop: 15,
+            }}
+            placeholder="Data"
+            value={date}
+            onChangeText={setDate}
           />
           <TextInput
             style={{
@@ -91,9 +116,9 @@ export default function AddDocuments({navigation}) {
               marginTop: 15,
             }}
             onPress={() =>
-              createDocument({file, title, date, category, details})
+              createVaccine({name, date, batch, address, details})
             }>
-            Cadastrar Documento
+            Cadastrar Vacina
           </Button>
         </ScrollView>
       </TouchableWithoutFeedback>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getRealmApp} from '../services/realm-config';
+import {getRealmApp} from '../../services/realm-config';
 import {
   View,
   Image,
@@ -10,20 +10,23 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
+import styles from './styles.js';
 
-export default function AddAppointments({navigation}) {
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+export default function AddDoctors({navigation}) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [speciality, setSpeciality] = useState('');
+  const [crm, setCrm] = useState('');
   const [address, setAddress] = useState('');
+  const [clinicName, setClinicName] = useState('');
   const [details, setDetails] = useState('');
-  const [doctor, setDoctor] = useState(0);
-  const [allDoctors, setAllDoctors] = useState([]);
   const app = getRealmApp();
 
-  const createAppointment = async data => {
-    //create new appointment
+  const createDoctor = async data => {
+    //create new doctor
     console.log(data);
-    navigation.navigate('Appointments');
+    navigation.navigate('Doctors');
   };
 
   return (
@@ -31,7 +34,7 @@ export default function AddAppointments({navigation}) {
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
-          <Text>Cadastrar novo Compromisso</Text>
+          <Text>Cadastrar novo Médico</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -43,9 +46,9 @@ export default function AddAppointments({navigation}) {
                 marginRight: 15,
                 marginTop: 15,
               }}
-              placeholder="Data do Compromisso"
-              value={date}
-              onChangeText={setDate}
+              placeholder="Nome"
+              value={name}
+              onChangeText={setName}
             />
             <TextInput
               style={{
@@ -54,9 +57,9 @@ export default function AddAppointments({navigation}) {
                 marginRight: 15,
                 marginTop: 15,
               }}
-              placeholder="Horário"
-              value={time}
-              onChangeText={setTime}
+              placeholder="Telefone"
+              value={phone}
+              onChangeText={setPhone}
             />
           </View>
           <TextInput //select
@@ -65,9 +68,9 @@ export default function AddAppointments({navigation}) {
               marginRight: 15,
               marginTop: 15,
             }}
-            placeholder="Médico Responsável"
-            value={doctor}
-            onChangeText={setDoctor}
+            placeholder="E-mail"
+            value={email}
+            onChangeText={setEmail}
           />
           <TextInput
             style={{
@@ -75,9 +78,39 @@ export default function AddAppointments({navigation}) {
               marginRight: 15,
               marginTop: 15,
             }}
-            placeholder="Local"
+            placeholder="Especialidade"
+            value={speciality}
+            onChangeText={setSpeciality}
+          />
+          <TextInput
+            style={{
+              marginLeft: 15,
+              marginRight: 15,
+              marginTop: 15,
+            }}
+            placeholder="CRM"
+            value={crm}
+            onChangeText={setCrm}
+          />
+          <TextInput
+            style={{
+              marginLeft: 15,
+              marginRight: 15,
+              marginTop: 15,
+            }}
+            placeholder="Endereço"
             value={address}
             onChangeText={setAddress}
+          />
+          <TextInput
+            style={{
+              marginLeft: 15,
+              marginRight: 15,
+              marginTop: 15,
+            }}
+            placeholder="Nome da Clínica"
+            value={clinicName}
+            onChangeText={setClinicName}
           />
           <TextInput
             style={{
@@ -101,8 +134,19 @@ export default function AddAppointments({navigation}) {
             style={{
               marginTop: 15,
             }}
-            onPress={() => createAppointment({date, doctor, address, details})}>
-            Cadastrar Compromisso
+            onPress={() =>
+              createDoctor({
+                name,
+                phone,
+                email,
+                speciality,
+                crm,
+                address,
+                clinicName,
+                details,
+              })
+            }>
+            Cadastrar Médico
           </Button>
         </ScrollView>
       </TouchableWithoutFeedback>

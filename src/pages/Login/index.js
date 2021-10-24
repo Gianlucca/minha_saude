@@ -5,6 +5,7 @@ import {View, Image} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {getRealmApp} from '../services/realm-config';
 import Realm from 'realm';
+import styles from './styles.js';
 
 export default function Login({navigation}) {
   const [email, setEmail] = React.useState('');

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, FlatList, StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
+import styles from './styles.js';
 
 export default function Documents({navigation}) {
   const [documents, setDocuments] = useState([]);

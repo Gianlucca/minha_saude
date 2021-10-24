@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getRealmApp} from '../services/realm-config';
+import {getRealmApp} from '../../services/realm-config';
 import {
   View,
   Image,
@@ -10,20 +10,21 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
+import styles from './styles.js';
 
-export default function AddVaccines({navigation}) {
-  const [file, setFile] = useState('');
-  const [name, setName] = useState('');
+export default function AddAppointments({navigation}) {
   const [date, setDate] = useState('');
-  const [batch, setBatch] = useState('');
+  const [time, setTime] = useState('');
   const [address, setAddress] = useState('');
   const [details, setDetails] = useState('');
+  const [doctor, setDoctor] = useState(0);
+  const [allDoctors, setAllDoctors] = useState([]);
   const app = getRealmApp();
 
-  const createVaccine = async data => {
-    //create new vaccine
+  const createAppointment = async data => {
+    //create new appointment
     console.log(data);
-    navigation.navigate('Vaccines');
+    navigation.navigate('Appointments');
   };
 
   return (
@@ -31,7 +32,7 @@ export default function AddVaccines({navigation}) {
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
-          <Text>Cadastrar nova Vacina</Text>
+          <Text>Cadastrar novo Compromisso</Text>
           <View
             style={{
               flexDirection: 'row',
@@ -43,9 +44,9 @@ export default function AddVaccines({navigation}) {
                 marginRight: 15,
                 marginTop: 15,
               }}
-              placeholder="Selecione uma Imagem"
-              value={file}
-              onChangeText={setFile}
+              placeholder="Data do Compromisso"
+              value={date}
+              onChangeText={setDate}
             />
             <TextInput
               style={{
@@ -54,25 +55,23 @@ export default function AddVaccines({navigation}) {
                 marginRight: 15,
                 marginTop: 15,
               }}
-              placeholder="Nome da Vacina"
-              value={name}
-              onChangeText={setName}
+              placeholder="Horário"
+              value={time}
+              onChangeText={setTime}
             />
           </View>
-          <TextInput
+          <TextInput //select
             style={{
-              flex: 1,
               marginLeft: 15,
               marginRight: 15,
               marginTop: 15,
             }}
-            placeholder="Lote"
-            value={batch}
-            onChangeText={setBatch}
+            placeholder="Médico Responsável"
+            value={doctor}
+            onChangeText={setDoctor}
           />
           <TextInput
             style={{
-              flex: 1,
               marginLeft: 15,
               marginRight: 15,
               marginTop: 15,
@@ -80,17 +79,6 @@ export default function AddVaccines({navigation}) {
             placeholder="Local"
             value={address}
             onChangeText={setAddress}
-          />
-          <TextInput
-            style={{
-              flex: 1,
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
-            placeholder="Data"
-            value={date}
-            onChangeText={setDate}
           />
           <TextInput
             style={{
@@ -114,10 +102,8 @@ export default function AddVaccines({navigation}) {
             style={{
               marginTop: 15,
             }}
-            onPress={() =>
-              createVaccine({name, date, batch, address, details})
-            }>
-            Cadastrar Vacina
+            onPress={() => createAppointment({date, doctor, address, details})}>
+            Cadastrar Compromisso
           </Button>
         </ScrollView>
       </TouchableWithoutFeedback>

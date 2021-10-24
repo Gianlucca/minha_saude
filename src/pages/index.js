@@ -1,20 +1,20 @@
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
-import Splash from './Splash';
-import Documents from './Documents';
-import Vaccines from './Vaccines';
-import Relatives from './Relatives.js';
-import Doctors from './Doctors.js';
-import Appointments from './Appointments';
-import Medicines from './Medicines.js';
-import AddDocuments from './AddDocuments';
-import AddVaccines from './AddVaccines';
-import AddRelatives from './AddRelatives.js';
-import AddDoctors from './AddDoctors.js';
-import AddAppointments from './AddAppointments';
-import AddMedicines from './AddMedicines.js';
-import Timeline from './Timeline.js';
+import Home from './Home/index.js';
+import Login from './Login/index.js';
+import Register from './Register/index.js';
+import Splash from './Splash/index.js';
+import Documents from './Documents/index.js';
+import Vaccines from './Vaccines/index.js';
+import Relatives from './Relatives/index.js';
+import Doctors from './Doctors/index.js';
+import Appointments from './Appointments/index.js';
+import Medicines from './Medicines/index.js';
+import AddDocuments from './AddDocuments/index.js';
+import AddVaccines from './AddVaccines/index.js';
+import AddRelatives from './AddRelatives/index.js';
+import AddDoctors from './AddDoctors/index.js';
+import AddAppointments from './AddAppointments/index.js';
+import AddMedicines from './AddMedicines/index.js';
+import Timeline from './Timeline/index.js';
 
 export {
   Home,

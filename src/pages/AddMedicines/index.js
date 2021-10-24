@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getRealmApp} from '../services/realm-config';
+import {getRealmApp} from '../../services/realm-config';
 import {
   View,
   Image,
@@ -10,6 +10,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
+import styles from './styles.js';
 
 export default function AddVaccines({navigation}) {
   const [file, setFile] = useState('');

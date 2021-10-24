@@ -84,11 +84,6 @@ function App() {
             title: 'Home',
           }}
         />
-        <Drawer.Screen name="Documents" component={Documents} />
-        <Drawer.Screen name="Vaccines" component={Vaccines} />
-        <Drawer.Screen name="Relatives" component={Relatives} />
-        <Drawer.Screen name="Doctors" component={Doctors} />
-        <Drawer.Screen name="Medicines" component={Medicines} />
         <Drawer.Screen
           name="Appointments"
           component={Appointments}
@@ -96,9 +91,56 @@ function App() {
             title: 'Agenda',
           }}
         />
+        <Drawer.Screen
+          name="Documents"
+          component={Documents}
+          options={{
+            title: 'Documentos',
+          }}
+        />
+        <Drawer.Screen
+          name="Vaccines"
+          component={Vaccines}
+          options={{
+            title: 'Vacinas',
+          }}
+        />
+        <Drawer.Screen
+          name="Relatives"
+          component={Relatives}
+          options={{
+            title: 'Parentes',
+          }}
+        />
+        <Drawer.Screen
+          name="Doctors"
+          component={Doctors}
+          options={{
+            title: 'Médicos',
+          }}
+        />
+        <Drawer.Screen
+          name="Medicines"
+          component={Medicines}
+          options={{
+            title: 'Remédios',
+          }}
+        />
 
-        <Drawer.Screen name="Timeline" component={Timeline} />
-        <Drawer.Screen name="Logout" component={Login} />
+        <Drawer.Screen
+          name="Timeline"
+          component={Timeline}
+          options={{
+            title: 'Linha do Tempo',
+          }}
+        />
+        <Drawer.Screen
+          name="Logout"
+          component={Login}
+          options={{
+            title: 'Sair',
+          }}
+        />
       </Drawer.Navigator>
     );
   };

@@ -3,6 +3,7 @@ import SecureStore from 'react-native-sensitive-info';
 import {Text, View, Button, FlatList, StatusBar} from 'react-native';
 import AppContext from '../components/AppContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import styles from './styles.js';
 
 export default function Home({navigation}) {
   const myContext = React.useContext(AppContext);
