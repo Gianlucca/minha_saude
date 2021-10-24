@@ -6,6 +6,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 export default function Home({navigation}) {
   const myContext = React.useContext(AppContext);
+
   const [upcomingTasks, setUpcomingTasks] = React.useState([]);
 
   const drawer = React.useRef(null);
@@ -117,6 +118,7 @@ export default function Home({navigation}) {
             details: 'é na sala 20',
           },
         ]}
+        keyExtractor={item => item.id}
         renderItem={({item}) => (
           <View
             style={{
@@ -129,7 +131,6 @@ export default function Home({navigation}) {
             <Text style={{color: '#fff'}}>{item.address}</Text>
           </View>
         )}
-        keyExtractor={item => item.id}
       />
     </SafeAreaView>
   );

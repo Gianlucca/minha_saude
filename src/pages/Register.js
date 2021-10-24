@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
+import {getRealmApp} from '../services/realm-config';
+import Realm from 'realm';
 
 export default function Register({navigation}) {
   const myContext = React.useContext(AppContext);
@@ -20,14 +22,27 @@ export default function Register({navigation}) {
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
   const [hasHealthInsurance, setHealthInsurance] = React.useState(false);
+  const app = getRealmApp();
 
   const registerAsync = async data => {
     // In a production app, we need to send user data to server and get a token
     // We will also need to handle errors if sign up failed
     // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
     // In the example, we'll use a dummy token
-    myContext.setUserToken('myToken');
-    await SecureStore.setItem('userToken', 'myToken', {});
+
+    try {
+      //verify if email exists
+      await app.emailPasswordAuth.registerUser(data.email, data.password);
+      navigation.navigate('Login');
+      //console.log(user);
+      //console.log(data);
+      //myContext.setIsSignout(false);
+      //myContext.setUserToken(`${user.id}`);
+      //await SecureStore.setItem('userToken', `${user.id}`, {});
+      //return user;
+    } catch (err) {
+      console.error('Failed to log in', err.message);
+    }
   };
   return (
     <KeyboardAvoidingView

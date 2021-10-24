@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, FlatList, StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
 
-export default function Doctors() {
+export default function Doctors({navigation}) {
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    //refresh all Doctors when page loads
+  }, []);
+
   return (
     <SafeAreaView
       style={{
@@ -139,7 +145,7 @@ export default function Doctors() {
         keyExtractor={item => item.id}
       />
       <IconButton
-        onPress={() => console.log('Pressed')}
+        onPress={() => navigation.navigate('AddDoctors')}
         icon="plus"
         size={30}
         style={{

@@ -3,21 +3,39 @@ import SecureStore from 'react-native-sensitive-info';
 import AppContext from '../components/AppContext';
 import {View, Image} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
+import {getRealmApp} from '../services/realm-config';
+import Realm from 'realm';
 
 export default function Login({navigation}) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const myContext = React.useContext(AppContext);
+  const app = getRealmApp();
+
+  React.useEffect(() => {
+    async function deleteToken() {
+      await SecureStore.deleteItem('userToken', {});
+      myContext.setUserToken('');
+    }
+    deleteToken();
+  }, []);
 
   const logInAsync = async data => {
-    //log in
-    //data.username
-    //data.password
-    // In a production app, we need to send some data (usually username, password) to server and get a token
-    // We will also need to handle errors if sign in failed
-    myContext.setIsSignout(false);
-    myContext.setUserToken('myToken');
-    await SecureStore.setItem('userToken', 'myToken', {});
+    const credentials = Realm.Credentials.emailPassword(
+      data.email,
+      data.password,
+    );
+    try {
+      const user = await app.logIn(credentials);
+      ('');
+      console.log('Successfully logged in!', user.id);
+      myContext.setIsSignout(false);
+      myContext.setUserToken(`${user.id}`);
+      await SecureStore.setItem('userToken', `${user.id}`, {});
+      return user;
+    } catch (err) {
+      console.error('Failed to log in', err.message);
+    }
   };
 
   return (

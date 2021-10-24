@@ -5,18 +5,25 @@ import SecureStore from 'react-native-sensitive-info';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AppContext from './src/components/AppContext';
+import {Text} from 'react-native';
 import {
   Home,
   Login,
   Register,
-  Documents,
   Splash,
   Timeline,
+  Documents,
   Vaccines,
   Relatives,
   Doctors,
   Appointments,
   Medicines,
+  AddDocuments,
+  AddVaccines,
+  AddRelatives,
+  AddDoctors,
+  AddAppointments,
+  AddMedicines,
 } from './src/pages';
 
 function App() {
@@ -66,60 +73,122 @@ function App() {
     },
   };
 
+  const DrawerComponent = () => {
+    return (
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+            title: 'Home',
+          }}
+        />
+        <Drawer.Screen name="Documents" component={Documents} />
+        <Drawer.Screen name="Vaccines" component={Vaccines} />
+        <Drawer.Screen name="Relatives" component={Relatives} />
+        <Drawer.Screen name="Doctors" component={Doctors} />
+        <Drawer.Screen name="Medicines" component={Medicines} />
+        <Drawer.Screen
+          name="Appointments"
+          component={Appointments}
+          options={{
+            title: 'Agenda',
+          }}
+        />
+
+        <Drawer.Screen name="Timeline" component={Timeline} />
+        <Drawer.Screen name="Logout" component={Login} />
+      </Drawer.Navigator>
+    );
+  };
+
   const Stack = createStackNavigator();
   const Drawer = createDrawerNavigator();
   return (
     <AppContext.Provider value={userData}>
       <PaperProvider theme={theme}>
         <NavigationContainer>
-          {userToken !== '' ? (
-            <Drawer.Navigator initialRouteName="Home">
-              <Drawer.Screen
-                name="Home"
-                component={Home}
+          <Stack.Navigator>
+            {userToken !== '' ? (
+              <Stack.Group>
+                <Stack.Screen
+                  name="Drawer"
+                  component={DrawerComponent}
+                  options={{headerShown: false}}
+                />
+                <Stack.Screen
+                  name="AddDocuments"
+                  component={AddDocuments}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="AddVaccines"
+                  component={AddVaccines}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="AddRelatives"
+                  component={AddRelatives}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="AddDoctors"
+                  component={AddDoctors}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="AddMedicines"
+                  component={AddMedicines}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="AddAppointments"
+                  component={AddAppointments}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+              </Stack.Group>
+            ) : isLoading ? (
+              <Stack.Screen
+                name="Splash"
+                component={Splash}
                 options={{
-                  title: 'Minha Saúde',
+                  headerShown: false,
                 }}
-              />
-              <Drawer.Screen name="Documents" component={Documents} />
-              <Drawer.Screen name="Vaccines" component={Vaccines} />
-              <Drawer.Screen name="Relatives" component={Relatives} />
-              <Drawer.Screen name="Doctors" component={Doctors} />
-              <Drawer.Screen name="Medicines" component={Medicines} />
-              <Drawer.Screen
-                name="Appointments"
-                component={Appointments}
-                options={{
-                  title: 'Agenda',
-                }}
-              />
-              <Drawer.Screen name="Timeline" component={Timeline} />
-            </Drawer.Navigator>
-          ) : (
-            <Stack.Navigator>
-              {isLoading ? (
-                <Stack.Screen name="Splash" component={Splash} /> // We haven't finished checking for the token yet
-              ) : (
-                <Stack.Group>
-                  <Stack.Screen
-                    name="Login"
-                    component={Login}
-                    options={{
-                      // When logging out, a pop animation feels intuitive
-                      animationTypeForReplace: isSignout ? 'pop' : 'push',
-                    }}
-                  />
-                  <Stack.Screen
-                    name="Register"
-                    component={Register}
-                    options={{
-                      title: 'Register',
-                    }}
-                  />
-                </Stack.Group>
-              )}
-            </Stack.Navigator>
-          )}
+              /> // We haven't finished checking for the token yet
+            ) : (
+              <Stack.Group>
+                <Stack.Screen
+                  name="Login"
+                  component={Login}
+                  options={{
+                    // When logging out, a pop animation feels intuitive
+                    animationTypeForReplace: isSignout ? 'pop' : 'push',
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="Register"
+                  component={Register}
+                  options={{
+                    headerShown: false,
+                  }}
+                />
+              </Stack.Group>
+            )}
+          </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
     </AppContext.Provider>
