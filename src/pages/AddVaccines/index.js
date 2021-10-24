@@ -33,88 +33,50 @@ export default function AddVaccines({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <Text>Cadastrar nova Vacina</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
+          <View style={styles.container}>
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Selecione uma Imagem"
               value={file}
               onChangeText={setFile}
             />
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Nome da Vacina"
               value={name}
               onChangeText={setName}
             />
           </View>
           <TextInput
-            style={{
-              flex: 1,
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Lote"
             value={batch}
             onChangeText={setBatch}
           />
           <TextInput
-            style={{
-              flex: 1,
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Local"
             value={address}
             onChangeText={setAddress}
           />
           <TextInput
-            style={{
-              flex: 1,
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Data"
             value={date}
             onChangeText={setDate}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Anotações"
             value={details}
             onChangeText={setDetails}
             secureTextEntry
           />
-          <Button
-            style={{
-              marginTop: 15,
-            }}
-            onPress={() => navigation.goBack()}>
+          <Button style={styles.button} onPress={() => navigation.goBack()}>
             Voltar
           </Button>
           <Button
-            style={{
-              marginTop: 15,
-            }}
+            style={styles.button}
             onPress={() =>
               createVaccine({name, date, batch, address, details})
             }>

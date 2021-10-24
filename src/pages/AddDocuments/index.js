@@ -32,65 +32,38 @@ export default function AddDocuments({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <Text>Cadastrar novo Documento</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
+          <View style={styles.container}>
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Selecione uma Imagem"
               value={file}
               onChangeText={setFile}
             />
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Data do documento"
               value={date}
               onChangeText={setDate}
             />
           </View>
           <TextInput //select
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Categoria Documento"
             value={category}
             onChangeText={setCategory}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Anotações"
             value={details}
             onChangeText={setDetails}
             secureTextEntry
           />
-          <Button
-            style={{
-              marginTop: 15,
-            }}
-            onPress={() => navigation.goBack()}>
+          <Button style={styles.button} onPress={() => navigation.goBack()}>
             Voltar
           </Button>
           <Button
-            style={{
-              marginTop: 15,
-            }}
+            style={styles.button}
             onPress={() =>
               createDocument({file, title, date, category, details})
             }>

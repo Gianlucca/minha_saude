@@ -1,7 +1,7 @@
 import * as React from 'react';
 import SecureStore from 'react-native-sensitive-info';
 import {Text, View, Button, FlatList, StatusBar} from 'react-native';
-import AppContext from '../components/AppContext';
+import AppContext from '../../components/AppContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import styles from './styles.js';
 
@@ -20,11 +20,7 @@ export default function Home({navigation}) {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        marginTop: StatusBar.currentHeight || 0,
-      }}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={[
           {
@@ -121,16 +117,15 @@ export default function Home({navigation}) {
         ]}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <View
-            style={{
-              backgroundColor: '#9f9f9f',
-              padding: 20,
-              marginVertical: 8,
-              marginHorizontal: 16,
-            }}>
-            <Text style={{color: '#fff'}}>{item.date}</Text>
-            <Text style={{color: '#fff'}}>{item.address}</Text>
-          </View>
+          <>
+            <View style={styles.headerText}>
+              <Text style={styles.headerText}>{item.date}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.text}>{item.address}</Text>
+              <Text style={styles.text}>{item.details}</Text>
+            </View>
+          </>
         )}
       />
     </SafeAreaView>

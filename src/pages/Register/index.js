@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SecureStore from 'react-native-sensitive-info';
-import AppContext from '../components/AppContext';
+import AppContext from '../../components/AppContext';
 import {
   View,
   Image,
@@ -10,8 +10,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
+
 import {ScrollView} from 'react-native-gesture-handler';
-import {getRealmApp} from '../services/realm-config';
+import {getRealmApp} from '../../services/realm-config';
 import Realm from 'realm';
 import styles from './styles.js';
 
@@ -50,104 +51,61 @@ export default function Register({navigation}) {
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <View style={styles.buttonContainer}>
             <Image
-              style={{width: 200, height: 220}}
-              source={require('../../assets/logo.png')}
+              style={styles.image}
+              source={require('../../../assets/logo.png')}
             />
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
+          <View style={styles.container}>
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Nome"
               value={name}
               onChangeText={setName}
             />
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Data Nasc."
               value={birth}
               onChangeText={setBirth}
             />
           </View>
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="E-mail"
             value={email}
             onChangeText={setEmail}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Senha"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Confirmar senha"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
             secureTextEntry
           />
-          <View
-            style={{
-              marginTop: 15,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+          <View style={styles.buttonContainer}>
             <Checkbox
-              style={{justifyContent: 'center', alignItems: 'center'}}
+              style={styles.buttonContainer}
               status={hasHealthInsurance ? 'checked' : 'unchecked'}
               onPress={() => {
                 setHealthInsurance(!hasHealthInsurance);
               }}
             />
-            <Text style={{alignSelf: 'center', textAlign: 'center'}}>
-              Possuí convenio médico?
-            </Text>
+            <Text style={styles.buttonContainer}>Possuí convenio médico?</Text>
           </View>
-          <Button
-            style={{
-              marginTop: 15,
-            }}
-            onPress={() => navigation.goBack()}>
+          <Button style={styles.button} onPress={() => navigation.goBack()}>
             Voltar
           </Button>
           <Button
-            style={{
-              marginTop: 15,
-            }}
+            style={styles.button}
             onPress={() =>
               registerAsync({name, birth, email, password, confirmPassword})
             }>

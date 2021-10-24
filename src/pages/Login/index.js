@@ -1,9 +1,9 @@
 import * as React from 'react';
 import SecureStore from 'react-native-sensitive-info';
-import AppContext from '../components/AppContext';
+import AppContext from '../../components/AppContext';
 import {View, Image} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
-import {getRealmApp} from '../services/realm-config';
+import {getRealmApp} from '../../services/realm-config';
 import Realm from 'realm';
 import styles from './styles.js';
 
@@ -41,50 +41,34 @@ export default function Login({navigation}) {
 
   return (
     <View style={{}}>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={styles.buttonContainer}>
         <Image
           style={{width: 200, height: 220}}
-          source={require('../../assets/logo.png')}
+          source={require('../../../assets/logo.png')}
         />
       </View>
       <TextInput
-        style={{
-          marginLeft: 15,
-          marginRight: 15,
-          marginTop: 15,
-        }}
+        style={styles.textInput}
         placeholder="E-mail"
         value={email}
         onChangeText={setEmail}
       />
 
       <TextInput
-        style={{
-          marginLeft: 15,
-          marginRight: 15,
-          marginTop: 15,
-        }}
+        style={styles.textInput}
         placeholder="Senha"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.buttonContainer}>
         <Button
-          style={{
-            marginTop: 15,
-          }}
+          style={styles.button}
           onPress={() => logInAsync({email, password})}>
           Entrar
         </Button>
         <Button
-          style={{
-            marginTop: 15,
-          }}
+          style={styles.button}
           onPress={() => navigation.navigate('Register')}>
           Cadastre-se
         </Button>

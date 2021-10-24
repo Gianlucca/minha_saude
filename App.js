@@ -5,7 +5,6 @@ import SecureStore from 'react-native-sensitive-info';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AppContext from './src/components/AppContext';
-import {Text} from 'react-native';
 import {
   Home,
   Login,
@@ -80,8 +79,8 @@ function App() {
           name="Home"
           component={Home}
           options={{
-            headerShown: false,
-            title: 'Home',
+            title: 'Minha Saúde',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen
@@ -89,6 +88,7 @@ function App() {
           component={Appointments}
           options={{
             title: 'Agenda',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen
@@ -96,6 +96,7 @@ function App() {
           component={Documents}
           options={{
             title: 'Documentos',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen
@@ -103,6 +104,7 @@ function App() {
           component={Vaccines}
           options={{
             title: 'Vacinas',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen
@@ -110,6 +112,7 @@ function App() {
           component={Relatives}
           options={{
             title: 'Parentes',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen
@@ -117,6 +120,7 @@ function App() {
           component={Doctors}
           options={{
             title: 'Médicos',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen
@@ -124,6 +128,7 @@ function App() {
           component={Medicines}
           options={{
             title: 'Remédios',
+            headerTitleAlign: 'center',
           }}
         />
 
@@ -132,6 +137,7 @@ function App() {
           component={Timeline}
           options={{
             title: 'Linha do Tempo',
+            headerTitleAlign: 'center',
           }}
         />
         <Drawer.Screen

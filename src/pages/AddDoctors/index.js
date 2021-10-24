@@ -35,105 +35,62 @@ export default function AddDoctors({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <Text>Cadastrar novo Médico</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
+          <View style={styles.container}>
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Nome"
               value={name}
               onChangeText={setName}
             />
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Telefone"
               value={phone}
               onChangeText={setPhone}
             />
           </View>
-          <TextInput //select
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+          <TextInput
+            style={styles.textInput}
             placeholder="E-mail"
             value={email}
             onChangeText={setEmail}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Especialidade"
             value={speciality}
             onChangeText={setSpeciality}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="CRM"
             value={crm}
             onChangeText={setCrm}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Endereço"
             value={address}
             onChangeText={setAddress}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Nome da Clínica"
             value={clinicName}
             onChangeText={setClinicName}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Anotações"
             value={details}
             onChangeText={setDetails}
             secureTextEntry
           />
-          <Button
-            style={{
-              marginTop: 15,
-            }}
-            onPress={() => navigation.goBack()}>
+          <Button style={styles.button} onPress={() => navigation.goBack()}>
             Voltar
           </Button>
           <Button
-            style={{
-              marginTop: 15,
-            }}
+            style={styles.button}
             onPress={() =>
               createDoctor({
                 name,

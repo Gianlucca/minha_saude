@@ -12,12 +12,7 @@ export default function Appointments({navigation}) {
   }, []);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        marginTop: StatusBar.currentHeight || 0,
-      }}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={
           //appointments
@@ -95,15 +90,9 @@ export default function Appointments({navigation}) {
           ]
         }
         renderItem={({item}) => (
-          <View
-            style={{
-              backgroundColor: '#9f9f9f',
-              padding: 20,
-              marginVertical: 8,
-              marginHorizontal: 16,
-            }}>
-            <Text style={{color: '#fff'}}>{item.date}</Text>
-            <Text style={{color: '#fff'}}>{item.address}</Text>
+          <View style={styles.row}>
+            <Text style={styles.text}>{item.date}</Text>
+            <Text style={styles.text}>{item.address}</Text>
           </View>
         )}
         keyExtractor={item => item.id}
@@ -112,18 +101,7 @@ export default function Appointments({navigation}) {
         onPress={() => navigation.navigate('AddAppointments')}
         icon="plus"
         size={30}
-        style={{
-          borderWidth: 1,
-          borderColor: 'rgba(0,0,0,0.2)',
-          width: 100,
-          height: 100,
-          backgroundColor: '#fff',
-          borderRadius: 100,
-          alignSelf: 'flex-end',
-          position: 'absolute',
-          bottom: 15,
-          right: 15,
-        }}
+        style={styles.addButton}
       />
     </SafeAreaView>
   );

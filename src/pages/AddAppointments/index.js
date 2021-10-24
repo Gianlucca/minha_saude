@@ -33,75 +33,44 @@ export default function AddAppointments({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <Text>Cadastrar novo Compromisso</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-            }}>
+          <View style={styles.container}>
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Data do Compromisso"
               value={date}
               onChangeText={setDate}
             />
             <TextInput
-              style={{
-                flex: 1,
-                marginLeft: 15,
-                marginRight: 15,
-                marginTop: 15,
-              }}
+              style={styles.textInput}
               placeholder="Horário"
               value={time}
               onChangeText={setTime}
             />
           </View>
           <TextInput //select
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Médico Responsável"
             value={doctor}
             onChangeText={setDoctor}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Local"
             value={address}
             onChangeText={setAddress}
           />
           <TextInput
-            style={{
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
+            style={styles.textInput}
             placeholder="Anotações"
             value={details}
             onChangeText={setDetails}
             secureTextEntry
           />
-          <Button
-            style={{
-              marginTop: 15,
-            }}
-            onPress={() => navigation.goBack()}>
+          <Button style={styles.button} onPress={() => navigation.goBack()}>
             Voltar
           </Button>
           <Button
-            style={{
-              marginTop: 15,
-            }}
+            style={styles.button}
             onPress={() => createAppointment({date, doctor, address, details})}>
             Cadastrar Compromisso
           </Button>
