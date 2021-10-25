@@ -50,9 +50,19 @@ export default function Documents({navigation}) {
         ]}
         renderItem={({item}) => (
           <View style={styles.row}>
-            <IconButton icon="file" size={30} />
-            <Text style={styles.text}>{item.title}</Text>
-            <Text style={styles.text}>{item.category}</Text>
+            <IconButton
+              style={styles.icon}
+              icon="file"
+              color="#fff"
+              size={30}
+            />
+            <View>
+              <Text style={styles.headerText}>
+                {item.date} - {item.title}
+              </Text>
+              <Text style={styles.text}>Categoria: {item.category}</Text>
+              <Text style={styles.text}>Detalhes: {item.details}</Text>
+            </View>
           </View>
         )}
         keyExtractor={item => item.id}

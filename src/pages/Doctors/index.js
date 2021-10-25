@@ -128,7 +128,12 @@ export default function Doctors({navigation}) {
         ]}
         renderItem={({item}) => (
           <View style={styles.row}>
-            <IconButton icon="account" size={30} />
+            <IconButton
+              style={styles.icon}
+              color="#fff"
+              icon="account"
+              size={30}
+            />
             <Text style={styles.text}>{item.name}</Text>
           </View>
         )}

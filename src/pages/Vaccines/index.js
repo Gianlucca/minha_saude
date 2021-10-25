@@ -98,9 +98,19 @@ export default function Vaccines({navigation}) {
         ]}
         renderItem={({item}) => (
           <View style={styles.row}>
-            <IconButton icon="needle" size={30} />
-            <Text style={styles.text}>{item.date}</Text>
-            <Text style={styles.text}>{item.address}</Text>
+            <IconButton
+              style={styles.icon}
+              icon="needle"
+              color="#fff"
+              size={30}
+            />
+            <View>
+              <Text style={styles.headerText}>{item.name}</Text>
+              <Text style={styles.text}>Lote: {item.batch}</Text>
+              <Text style={styles.text}>
+                Local: {item.address} - {item.date}
+              </Text>
+            </View>
           </View>
         )}
         keyExtractor={item => item.id}

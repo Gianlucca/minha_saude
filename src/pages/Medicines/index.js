@@ -43,13 +43,6 @@ export default function Medicines({navigation}) {
             details: 'tomar pra dores em geral',
           },
           {
-            id: '3',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
             id: '4',
             file: 'image.jpg',
             name: 'paracetamal',
@@ -90,7 +83,6 @@ export default function Medicines({navigation}) {
             file: 'image.jpg',
             name: 'paracetamal',
             dosage: '1 por dia',
-            howManyPills: '12',
             expDate: '12/12/2022',
             details: 'tomar pra dores em geral',
           },
@@ -106,11 +98,26 @@ export default function Medicines({navigation}) {
         ]}
         renderItem={({item}) => (
           <View style={styles.row}>
-            <IconButton icon="pill" size={30} />
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.dosage}</Text>
-            <Text style={styles.text}>{item.howManyPills}</Text>
-            <Text style={styles.text}>{item.expDate}</Text>
+            <IconButton
+              style={styles.icon}
+              icon="pill"
+              color="#fff"
+              size={30}
+            />
+            <View>
+              <Text style={styles.headerText}>{item.name}</Text>
+              <View>
+                <Text style={styles.text}>Dosagem: {item.dosage}</Text>
+                {item.howManyPills > 0 && (
+                  <Text style={styles.text}>
+                    Comprimidos restantes: {item.howManyPills}
+                  </Text>
+                )}
+                <Text style={styles.text}>
+                  Data de Validade: {item.expDate}
+                </Text>
+              </View>
+            </View>
           </View>
         )}
         keyExtractor={item => item.id}

@@ -91,8 +91,18 @@ export default function Appointments({navigation}) {
         }
         renderItem={({item}) => (
           <View style={styles.row}>
-            <Text style={styles.text}>{item.date}</Text>
-            <Text style={styles.text}>{item.address}</Text>
+            <View>
+              <Text style={styles.text}>
+                {item.date} - {item.address}
+              </Text>
+              <Text style={styles.text}>{item.details}</Text>
+            </View>
+            <IconButton
+              style={styles.icon}
+              icon="calendar"
+              color="#fff"
+              size={30}
+            />
           </View>
         )}
         keyExtractor={item => item.id}
