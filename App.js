@@ -19,6 +19,7 @@ import {
   Medicines,
   AddDocuments,
   AddVaccines,
+  Profile,
   AddRelatives,
   AddDoctors,
   AddAppointments,
@@ -84,6 +85,13 @@ function App() {
           }}
         />
         <Drawer.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            title: 'Meu Perfil',
+          }}
+        />
+        <Drawer.Screen
           name="Appointments"
           component={Appointments}
           options={{
@@ -131,7 +139,6 @@ function App() {
             headerTitleAlign: 'center',
           }}
         />
-
         <Drawer.Screen
           name="Timeline"
           component={Timeline}

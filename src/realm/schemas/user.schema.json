@@ -1,0 +1,30 @@
+{
+  "bsonType": "object",
+  "required": ["email", "_partition", "owner_id", "_id"],
+  "properties": {
+    "_id": {
+      "bsonType": "string"
+    },
+    "_partition": {
+      "bsonType": "string"
+    },
+    "owner_id": {
+      "bsonType": "string"
+    },
+    "uid": {
+      "bsonType": "string"
+    },
+    "name": {
+      "bsonType": "string"
+    },
+    "birth": {
+      "bsonType": "date"
+    },
+    "email": {
+      "bsonType": "string"
+    },
+    "hasHealthInsurance": {
+      "bsonType": "boolean"
+    }
+  }
+}

@@ -28,8 +28,11 @@ export default function Login({navigation}) {
     );
     try {
       const user = await app.logIn(credentials);
-      ('');
-      console.log('Successfully logged in!', user.id);
+      console.log('Successfully logged in!');
+      console.log(user);
+      console.log(user.profile);
+      console.log(user.id);
+      console.log(user.customData);
       myContext.setIsSignout(false);
       myContext.setUserToken(`${user.id}`);
       await SecureStore.setItem('userToken', `${user.id}`, {});

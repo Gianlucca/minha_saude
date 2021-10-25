@@ -18,22 +18,13 @@ import styles from './styles.js';
 
 export default function Register({navigation}) {
   const myContext = React.useContext(AppContext);
-  const [name, setName] = React.useState('');
-  const [birth, setBirth] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [hasHealthInsurance, setHealthInsurance] = React.useState(false);
   const app = getRealmApp();
 
   const registerAsync = async data => {
-    // In a production app, we need to send user data to server and get a token
-    // We will also need to handle errors if sign up failed
-    // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-    // In the example, we'll use a dummy token
-
     try {
-      //verify if email exists
       await app.emailPasswordAuth.registerUser(data.email, data.password);
       navigation.navigate('Login');
       //console.log(user);
@@ -57,20 +48,6 @@ export default function Register({navigation}) {
               source={require('../../../assets/logo.png')}
             />
           </View>
-          <View style={styles.container}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Nome"
-              value={name}
-              onChangeText={setName}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Data Nasc."
-              value={birth}
-              onChangeText={setBirth}
-            />
-          </View>
           <TextInput
             style={styles.textInput}
             placeholder="E-mail"
@@ -92,25 +69,15 @@ export default function Register({navigation}) {
             secureTextEntry
           />
           <View style={styles.buttonContainer}>
-            <Checkbox
-              style={styles.buttonContainer}
-              status={hasHealthInsurance ? 'checked' : 'unchecked'}
-              onPress={() => {
-                setHealthInsurance(!hasHealthInsurance);
-              }}
-            />
-            <Text style={styles.buttonContainer}>Possuí convenio médico?</Text>
+            <Button style={styles.button} onPress={() => navigation.goBack()}>
+              Voltar
+            </Button>
+            <Button
+              style={styles.button}
+              onPress={() => registerAsync({email, password, confirmPassword})}>
+              Cadastrar
+            </Button>
           </View>
-          <Button style={styles.button} onPress={() => navigation.goBack()}>
-            Voltar
-          </Button>
-          <Button
-            style={styles.button}
-            onPress={() =>
-              registerAsync({name, birth, email, password, confirmPassword})
-            }>
-            Cadastrar
-          </Button>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

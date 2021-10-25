@@ -1,5 +1,6 @@
 import Home from './Home/index.js';
 import Login from './Login/index.js';
+import Profile from './Profile/index.js';
 import Register from './Register/index.js';
 import Splash from './Splash/index.js';
 import Documents from './Documents/index.js';
@@ -23,6 +24,7 @@ export {
   Register,
   Splash,
   Documents,
+  Profile,
   Vaccines,
   Relatives,
   Doctors,
