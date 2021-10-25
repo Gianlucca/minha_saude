@@ -34,77 +34,82 @@ export default function AddDoctors({navigation}) {
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
-          <Text>Cadastrar novo Médico</Text>
-          <View style={styles.container}>
+          <View style={{flex: 1}}>
+            <Text style={styles.headerText}>Cadastrar novo Médico</Text>
+            <View style={styles.container}>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Nome"
+                value={name}
+                onChangeText={setName}
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Telefone"
+                value={phone}
+                onChangeText={setPhone}
+              />
+            </View>
             <TextInput
               style={styles.textInput}
-              placeholder="Nome"
-              value={name}
-              onChangeText={setName}
+              placeholder="E-mail"
+              value={email}
+              onChangeText={setEmail}
             />
             <TextInput
               style={styles.textInput}
-              placeholder="Telefone"
-              value={phone}
-              onChangeText={setPhone}
+              placeholder="Especialidade"
+              value={speciality}
+              onChangeText={setSpeciality}
             />
+            <TextInput
+              style={styles.textInput}
+              placeholder="CRM"
+              value={crm}
+              onChangeText={setCrm}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Endereço"
+              value={address}
+              onChangeText={setAddress}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Nome da Clínica"
+              value={clinicName}
+              onChangeText={setClinicName}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Anotações"
+              value={details}
+              onChangeText={setDetails}
+              multiline={true}
+              numberOfLines={6}
+            />
+            <View style={styles.buttonContainer}>
+              <Button style={styles.button} onPress={() => navigation.goBack()}>
+                Voltar
+              </Button>
+              <Button
+                style={styles.button}
+                onPress={() =>
+                  createDoctor({
+                    name,
+                    phone,
+                    email,
+                    speciality,
+                    crm,
+                    address,
+                    clinicName,
+                    details,
+                  })
+                }>
+                Cadastrar Médico
+              </Button>
+            </View>
           </View>
-          <TextInput
-            style={styles.textInput}
-            placeholder="E-mail"
-            value={email}
-            onChangeText={setEmail}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Especialidade"
-            value={speciality}
-            onChangeText={setSpeciality}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="CRM"
-            value={crm}
-            onChangeText={setCrm}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Endereço"
-            value={address}
-            onChangeText={setAddress}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Nome da Clínica"
-            value={clinicName}
-            onChangeText={setClinicName}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Anotações"
-            value={details}
-            onChangeText={setDetails}
-            secureTextEntry
-          />
-          <Button style={styles.button} onPress={() => navigation.goBack()}>
-            Voltar
-          </Button>
-          <Button
-            style={styles.button}
-            onPress={() =>
-              createDoctor({
-                name,
-                phone,
-                email,
-                speciality,
-                crm,
-                address,
-                clinicName,
-                details,
-              })
-            }>
-            Cadastrar Médico
-          </Button>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

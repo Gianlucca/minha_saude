@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
+import {Button, Text, TextInput, IconButton} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getRealmApp} from '../../services/realm-config';
 import {
@@ -32,68 +32,79 @@ export default function AddVaccines({navigation}) {
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
-          <Text>Cadastrar novo Remédio</Text>
-          <View style={styles.container}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Selecione uma Imagem"
-              value={file}
-              onChangeText={setFile}
-            />
+          <View style={{flex: 1}}>
+            <Text style={styles.headerText}>Cadastrar novo Remédio</Text>
+            <View style={styles.container}>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Selecione uma Imagem"
+                value={file}
+                onChangeText={setFile}
+              />
+              <IconButton
+                style={styles.iconButton}
+                icon="plus"
+                color="#000"
+                size={30}
+              />
+            </View>
             <TextInput
               style={styles.textInput}
               placeholder="Nome do Remédio"
               value={name}
               onChangeText={setName}
             />
+            <TextInput
+              style={{
+                flex: 1,
+                marginLeft: 15,
+                marginRight: 15,
+                marginTop: 15,
+              }}
+              placeholder="Dosagem"
+              value={dosage}
+              onChangeText={setDosage}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Quantidade de comprimidos"
+              value={howManyPills}
+              onChangeText={setHowManyPills}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Data de Validade"
+              value={expDate}
+              onChangeText={setExpDate}
+            />
+            <TextInput
+              style={styles.textInput}
+              placeholder="Anotações"
+              value={details}
+              onChangeText={setDetails}
+              multiline={true}
+              numberOfLines={6}
+            />
+            <View style={styles.buttonContainer}>
+              <Button style={styles.button} onPress={() => navigation.goBack()}>
+                Voltar
+              </Button>
+              <Button
+                style={styles.button}
+                onPress={() =>
+                  createMedicine({
+                    file,
+                    name,
+                    dosage,
+                    howManyPills,
+                    expDate,
+                    details,
+                  })
+                }>
+                Cadastrar Remédio
+              </Button>
+            </View>
           </View>
-          <TextInput
-            style={{
-              flex: 1,
-              marginLeft: 15,
-              marginRight: 15,
-              marginTop: 15,
-            }}
-            placeholder="Dosagem"
-            value={dosage}
-            onChangeText={setDosage}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Quantidade de comprimidos"
-            value={howManyPills}
-            onChangeText={setHowManyPills}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Data de Validade"
-            value={expDate}
-            onChangeText={setExpDate}
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholder="Anotações"
-            value={details}
-            onChangeText={setDetails}
-            secureTextEntry
-          />
-          <Button style={styles.button} onPress={() => navigation.goBack()}>
-            Voltar
-          </Button>
-          <Button
-            style={styles.button}
-            onPress={() =>
-              createMedicine({
-                file,
-                name,
-                dosage,
-                howManyPills,
-                expDate,
-                details,
-              })
-            }>
-            Cadastrar Remédio
-          </Button>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
