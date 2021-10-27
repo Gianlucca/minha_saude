@@ -6,9 +6,12 @@ exports = function (authEvent) {
 
   var newUser = {
     uid: user.id,
-    email: user.data.email,
-    name: user.data.name,
-    birth: user.data.birth,
+    email: user.data.email ? user.data.email : '',
+    name: user.data.name ? user.data.name : '',
+    birth: user.data.birth ? user.data.birth : '',
+    hasHealthInsurance: user.data.hasHealthInsurance
+      ? user.data.hasHealthInsurance
+      : '',
   };
 
   users.updateOne({_id: user.id}, newUser, {upsert: true});

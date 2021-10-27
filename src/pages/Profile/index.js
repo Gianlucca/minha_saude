@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import SecureStore from 'react-native-sensitive-info';
 import AppContext from '../../components/AppContext';
 import {
@@ -17,15 +17,40 @@ import Realm from 'realm';
 import styles from './styles.js';
 
 export default function Profile({navigation}) {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [birth, setBirth] = React.useState('');
-  const [hasHealthInsurance, setHealthInsurance] = React.useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [birth, setBirth] = useState('');
+  const [hasHealthInsurance, setHealthInsurance] = useState(false);
   const app = getRealmApp();
-  const myContext = React.useContext(AppContext);
+  const myContext = useContext(AppContext);
+
+  useEffect(() => {
+    //fetch user custom data to fill inputs
+    const customData = app.currentUser.customData;
+    if (!!customData) {
+      if (customData.name) {
+        setName(customData.name);
+      }
+      if (customData.email) {
+        setEmail(customData.email);
+      }
+      if (customData.birth) {
+        setBirth(customData.birth);
+      }
+      if (customData.hasHealthInsurance) {
+        setHealthInsurance(customData.hasHealthInsurance);
+      }
+    }
+  }, []);
 
   const editProfile = async data => {
-    console.log(data);
+    const user = app.currentUser;
+    console.log(app.currentUser.customData);
+    data.id = myContext.userToken;
+    await user.functions.updateUserProfile(data);
+
+    await app.currentUser.refreshCustomData();
+    console.log(app.currentUser.customData);
   };
 
   return (
