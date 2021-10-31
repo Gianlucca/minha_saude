@@ -1,0 +1,31 @@
+{
+  "title": "appointments",
+  "bsonType": "object",
+  "required": ["_id", "_partition", "owner_id", "date"],
+  "properties": {
+    "_id": {
+      "bsonType": "string"
+    },
+    "_uid": {
+      "bsonType": "string"
+    },
+    "_partition": {
+      "bsonType": "string"
+    },
+    "owner_id": {
+      "bsonType": "string"
+    },
+    "date": {
+      "bsonType": "date"
+    },
+    "doctor_id": {
+      "bsonType": "string"
+    },
+    "address": {
+      "bsonType": "string"
+    },
+    "details": {
+      "bsonType": "string"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "title": "medicines",
+  "bsonType": "object",
+  "required": ["_id", "_partition", "owner_id", "name"],
+  "properties": {
+    "_id": {
+      "bsonType": "string"
+    },
+    "_uid": {
+      "bsonType": "string"
+    },
+    "_partition": {
+      "bsonType": "string"
+    },
+    "owner_id": {
+      "bsonType": "string"
+    },
+    "file": {
+      "bsonType": "binData"
+    },
+    "name": {
+      "bsonType": "string"
+    },
+    "dosage": {
+      "bsonType": "string"
+    },
+    "how_many_pills": {
+      "bsonType": "string"
+    },
+    "exp_date": {
+      "bsonType": "string"
+    },
+    "details": {
+      "bsonType": "string"
+    }
+  }
+}

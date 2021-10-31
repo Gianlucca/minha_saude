@@ -1,0 +1,43 @@
+{
+  "title": "doctors",
+  "bsonType": "object",
+  "required": ["_id", "_partition", "owner_id", "name"],
+  "properties": {
+    "_id": {
+      "bsonType": "string"
+    },
+    "_uid": {
+      "bsonType": "string"
+    },
+    "_partition": {
+      "bsonType": "string"
+    },
+    "owner_id": {
+      "bsonType": "string"
+    },
+    "name": {
+      "bsonType": "string"
+    },
+    "phone": {
+      "bsonType": "string"
+    },
+    "email": {
+      "bsonType": "string"
+    },
+    "speciality": {
+      "bsonType": "string"
+    },
+    "crm": {
+      "bsonType": "string"
+    },
+    "address": {
+      "bsonType": "string"
+    },
+    "clinic_name": {
+      "bsonType": "string"
+    },
+    "details": {
+      "bsonType": "string"
+    }
+  }
+}

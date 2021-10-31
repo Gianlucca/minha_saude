@@ -1,0 +1,34 @@
+{
+  "title": "documents",
+  "bsonType": "object",
+  "required": ["_id", "_partition", "owner_id", "title"],
+  "properties": {
+    "_id": {
+      "bsonType": "string"
+    },
+    "_uid": {
+      "bsonType": "string"
+    },
+    "_partition": {
+      "bsonType": "string"
+    },
+    "owner_id": {
+      "bsonType": "string"
+    },
+    "file": {
+      "bsonType": "binData"
+    },
+    "title": {
+      "bsonType": "string"
+    },
+    "date": {
+      "bsonType": "date"
+    },
+    "category": {
+      "bsonType": "string"
+    },
+    "details": {
+      "bsonType": "string"
+    }
+  }
+}
