@@ -9,48 +9,52 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
-
+import {
+  Button,
+  Text,
+  TextInput,
+  IconButton,
+  Checkbox,
+} from 'react-native-paper';
+import moment from 'moment';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getRealmApp} from '../../services/realm-config';
 import Realm from 'realm';
+import DatePicker from 'react-native-date-picker';
 import styles from './styles.js';
 
 export default function Profile({navigation}) {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [birth, setBirth] = useState('');
+  const [birth, setBirth] = useState(new Date());
   const [hasHealthInsurance, setHealthInsurance] = useState(false);
   const app = getRealmApp();
   const myContext = useContext(AppContext);
 
   useEffect(() => {
-    //fetch user custom data to fill inputs
-    const customData = app.currentUser.customData;
-    if (!!customData) {
-      if (customData.name) {
-        setName(customData.name);
+    const refreshCustomData = async () => {
+      const customData = await app.currentUser.refreshCustomData();
+      console.log(customData);
+      if (!!customData) {
+        if (customData.name) {
+          setName(customData.name);
+        }
+        if (customData.birth) {
+          setBirth(new Date(customData.birth));
+        }
+        if (customData.hasHealthInsurance) {
+          setHealthInsurance(customData.hasHealthInsurance);
+        }
       }
-      if (customData.email) {
-        setEmail(customData.email);
-      }
-      if (customData.birth) {
-        setBirth(customData.birth);
-      }
-      if (customData.hasHealthInsurance) {
-        setHealthInsurance(customData.hasHealthInsurance);
-      }
-    }
+    };
+    refreshCustomData();
   }, []);
 
   const editProfile = async data => {
     const user = app.currentUser;
-    console.log(app.currentUser.customData);
     data.id = myContext.userToken;
     await user.functions.updateUserProfile(data);
-
-    await app.currentUser.refreshCustomData();
-    console.log(app.currentUser.customData);
+    await user.refreshCustomData();
+    console.log(user.customData);
   };
 
   return (
@@ -66,18 +70,19 @@ export default function Profile({navigation}) {
               value={name}
               onChangeText={setName}
             />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Data de Nascimento"
-              value={birth}
-              onChangeText={setBirth}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="E-mail"
-              value={email}
-              onChangeText={setEmail}
-            />
+            <View style={styles.container}>
+              <Text style={styles.label}>Data de Nascimento:</Text>
+              <DatePicker
+                style={styles.textInput}
+                mode="date"
+                textColor="#000"
+                date={birth}
+                androidVariant="nativeAndroid"
+                onDateChange={birth => {
+                  setBirth(birth);
+                }}
+              />
+            </View>
 
             <View style={styles.buttonContainer}>
               <Checkbox
@@ -98,7 +103,6 @@ export default function Profile({navigation}) {
                   editProfile({
                     name,
                     birth,
-                    email,
                     hasHealthInsurance,
                   })
                 }>

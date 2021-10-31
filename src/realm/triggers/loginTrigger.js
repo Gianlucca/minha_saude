@@ -5,14 +5,10 @@ exports = function (authEvent) {
   const users = mongodb.db('minha-saude').collection('user');
 
   var newUser = {
-    uid: user.id,
-    email: user.data.email ? user.data.email : '',
-    name: user.data.name ? user.data.name : '',
-    birth: user.data.birth ? user.data.birth : '',
-    hasHealthInsurance: user.data.hasHealthInsurance
-      ? user.data.hasHealthInsurance
-      : '',
+    _partition: user.id,
+    owner_id: user.id,
+    email: user.data.email,
   };
 
-  users.updateOne({_id: user.id}, newUser, {upsert: true});
+  users.updateOne({_id: user.id}, {$set: newUser}, {upsert: true});
 };

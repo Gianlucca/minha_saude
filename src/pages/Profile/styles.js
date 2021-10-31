@@ -17,6 +17,15 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     color: '#fff',
   },
+  label: {
+    fontSize: 24,
+    flexDirection: 'row',
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 15,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
   iconButton: {
     flexDirection: 'row',
     marginTop: 30,
