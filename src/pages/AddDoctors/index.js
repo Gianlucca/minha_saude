@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getRealmApp} from '../../services/realm-config';
@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import styles from './styles.js';
+import AppContext from '../../components/AppContext';
 
 export default function AddDoctors({navigation}) {
   const [name, setName] = useState('');
@@ -22,9 +23,12 @@ export default function AddDoctors({navigation}) {
   const [clinicName, setClinicName] = useState('');
   const [details, setDetails] = useState('');
   const app = getRealmApp();
+  const myContext = useContext(AppContext);
 
   const createDoctor = async data => {
     //create new doctor
+    data.id = myContext.userToken;
+    await app.currentUser.functions.createDoctor(data);
     console.log(data);
     navigation.navigate('Doctors');
   };

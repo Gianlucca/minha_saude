@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: '#f3f3f3',
+    borderWidth: 1,
     borderRadius: 100,
     alignSelf: 'flex-end',
     position: 'absolute',

@@ -29,6 +29,15 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginTop: 15,
+    backgroundColor: '#eee',
+  },
+  picker: {
+    flex: 1,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 15,
+    backgroundColor: '#eee',
+    color: '#888',
   },
   headerText: {
     color: '#999',

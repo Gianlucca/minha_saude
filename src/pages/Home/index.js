@@ -10,14 +10,9 @@ export default function Home({navigation}) {
 
   const [upcomingTasks, setUpcomingTasks] = React.useState([]);
 
-  const drawer = React.useRef(null);
-
-  const signOutAsync = async () => {
-    //sign out
-    await SecureStore.deleteItem('userToken', {});
-    myContext.setIsSignout(true);
-    myContext.setUserToken('');
-  };
+  React.useEffect(() => {
+    //
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

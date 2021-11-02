@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: '#f3f3f3',
     borderRadius: 100,
+    borderWidth: 1,
     alignSelf: 'flex-end',
     position: 'absolute',
     bottom: 15,

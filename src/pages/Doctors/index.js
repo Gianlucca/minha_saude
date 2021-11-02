@@ -1,131 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, FlatList, StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
 import styles from './styles.js';
+import AppContext from '../../components/AppContext';
+import {getRealmApp} from '../../services/realm-config';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function Doctors({navigation}) {
   const [doctors, setDoctors] = useState([]);
+  const isFocused = useIsFocused();
+  const myContext = useContext(AppContext);
+  const app = getRealmApp();
 
   useEffect(() => {
     //refresh all Doctors when page loads
-  }, []);
+    const fetchAllDoctors = async () => {
+      let allDoctors = await app.currentUser.functions.fetchAllDoctors(
+        myContext.userToken,
+      );
+      console.log('fetching all doctors');
+      setDoctors(allDoctors);
+    };
+    if (isFocused) {
+      fetchAllDoctors();
+    }
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={[
-          {
-            id: '0',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '1',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '2',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '3',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '4',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '5',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '6',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '7',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '8',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-          {
-            id: '9',
-            name: 'Doutor abobrinha',
-            phone: 11968477754,
-            email: 'teste@teste.com',
-            speciality: 'Joelho',
-            crm: '6555',
-            address: 'Av Carlos Gomes 888',
-            clinicName: 'hospital sao luiz',
-            details: 'é na sala 903',
-          },
-        ]}
+        data={doctors}
         renderItem={({item}) => (
           <View style={styles.row}>
             <IconButton
@@ -137,7 +42,7 @@ export default function Doctors({navigation}) {
             <Text style={styles.text}>{item.name}</Text>
           </View>
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
       />
       <IconButton
         onPress={() => navigation.navigate('AddDoctors')}

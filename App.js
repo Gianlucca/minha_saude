@@ -30,7 +30,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSignout, setIsSignout] = useState(false);
   const [userToken, setUserToken] = useState('');
-  //const [customData, setCustomData] = useState([]);
 
   const userData = {
     isLoading: isLoading,
@@ -39,8 +38,6 @@ function App() {
     setIsSignout,
     userToken: userToken,
     setUserToken,
-    //customData: customData,
-    //setCustomData,
   };
 
   useEffect(() => {
