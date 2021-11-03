@@ -30,7 +30,6 @@ export default function AddAppointments({navigation}) {
   const createAppointment = async data => {
     data.id = myContext.userToken;
     await app.currentUser.functions.createAppointment(data);
-    console.log(data);
     navigation.navigate('Appointments');
   };
 
