@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Button, Text, TextInput, IconButton} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getRealmApp} from '../../services/realm-config';
 import {
   View,
   Image,
@@ -11,18 +10,25 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import styles from './styles.js';
+import AppContext from '../../components/AppContext';
+import {getRealmApp} from '../../services/realm-config';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-export default function AddVaccines({navigation}) {
-  const [file, setFile] = useState('');
+export default function addMedicines({navigation}) {
+  const [file, setFile] = useState({filename: '', base64: ''});
   const [name, setName] = useState('');
   const [expDate, setExpDate] = useState('');
+
   const [dosage, setDosage] = useState('');
   const [howManyPills, setHowManyPills] = useState('');
   const [details, setDetails] = useState('');
+  const myContext = useContext(AppContext);
   const app = getRealmApp();
 
   const createMedicine = async data => {
     //create new medicine
+    data.id = myContext.userToken;
+    await app.currentUser.functions.createMedicine(data);
     console.log(data);
     navigation.navigate('Medicines');
   };
@@ -38,14 +44,54 @@ export default function AddVaccines({navigation}) {
               <TextInput
                 style={styles.textInput}
                 placeholder="Selecione uma Imagem"
-                value={file}
-                onChangeText={setFile}
+                value={!!file ? file.filename : ''}
+                disabled
               />
               <IconButton
                 style={styles.iconButton}
-                icon="plus"
+                icon="camera"
                 color="#000"
                 size={30}
+                onPress={() =>
+                  launchCamera(
+                    {
+                      mediaType: 'photo',
+                      cameraType: 'back',
+                      includeBase64: true,
+                    },
+                    ({assets}) => {
+                      if (!!assets) {
+                        setFile({
+                          filename: assets[0].fileName,
+                          base64: assets[0].base64,
+                        });
+                      }
+                    },
+                  )
+                }
+              />
+              <IconButton
+                style={styles.iconButton}
+                icon="file"
+                color="#000"
+                size={30}
+                onPress={() =>
+                  launchImageLibrary(
+                    {
+                      mediaType: 'photo',
+                      includeBase64: true,
+                      selectionLimit: 1,
+                    },
+                    ({assets}) => {
+                      if (!!assets) {
+                        setFile({
+                          filename: assets[0].fileName,
+                          base64: assets[0].base64,
+                        });
+                      }
+                    },
+                  )
+                }
               />
             </View>
             <TextInput
