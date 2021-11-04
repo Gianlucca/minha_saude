@@ -19,13 +19,12 @@ export default function addMedicines({navigation}) {
   const [file, setFile] = useState({filename: '', base64: ''});
   const [name, setName] = useState('');
   const [expDate, setExpDate] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
   const [dosage, setDosage] = useState('');
   const [howManyPills, setHowManyPills] = useState('');
   const [details, setDetails] = useState('');
   const myContext = useContext(AppContext);
   const app = getRealmApp();
+  const [isLoading, setIsLoading] = useState(false);
 
   const createMedicine = async data => {
     //create new medicine

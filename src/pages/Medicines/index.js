@@ -31,7 +31,7 @@ export default function Medicines({navigation}) {
       <FlatList
         data={medicines}
         renderItem={({item}) => {
-          let base64Icon = `data:image/jpeg;base64,${item.file}`;
+          let base64Icon = `data:image/png;base64,${item.file}`;
           return (
             <View style={styles.row}>
               <IconButton
