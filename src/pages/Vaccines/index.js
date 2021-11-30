@@ -2,10 +2,11 @@ import React, {useState, useEffect, useContext} from 'react';
 import {View, FlatList, StatusBar, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
-import styles from './styles.js';
 import AppContext from '../../components/AppContext';
 import {getRealmApp} from '../../services/realm-config';
 import {useIsFocused} from '@react-navigation/native';
+import moment from 'moment';
+import styles from './styles.js';
 
 export default function Vaccines({navigation}) {
   const [vaccines, setVaccines] = useState([]);
@@ -44,9 +45,12 @@ export default function Vaccines({navigation}) {
               <View>
                 <Text style={styles.headerText}>{item.name}</Text>
                 <Text style={styles.text}>Lote: {item.batch}</Text>
-                <Text style={styles.text}>
-                  Local: {item.address} - {item.date}
-                </Text>
+                <Text style={styles.text}>Local: {item.address}</Text>
+                {item.date != '' && (
+                  <Text style={styles.text}>
+                    Date: {moment(item.date).format('DD-MM-YYYY')}
+                  </Text>
+                )}
               </View>
               <Image style={{flex: 1, width: 50}} source={{uri: base64Icon}} />
             </View>
@@ -58,6 +62,7 @@ export default function Vaccines({navigation}) {
         onPress={() => navigation.navigate('AddVaccines')}
         icon="plus"
         size={30}
+        color="#edf2f4"
         style={styles.addButton}
       />
     </SafeAreaView>

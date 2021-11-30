@@ -53,6 +53,10 @@ export default function Login({navigation}) {
         style={styles.textInput}
         placeholder="E-mail"
         value={email}
+        outlineColor="#2B2D42"
+        selectionColor="#8d99ae"
+        activeOutlineColor="#ef233c"
+        underlineColor="#2B2D42"
         onChangeText={setEmail}
       />
 
@@ -60,19 +64,23 @@ export default function Login({navigation}) {
         style={styles.textInput}
         placeholder="Senha"
         value={password}
+        outlineColor="#2B2D42"
+        selectionColor="#8d99ae"
+        activeOutlineColor="#ef233c"
+        underlineColor="#2B2D42"
         onChangeText={setPassword}
         secureTextEntry
       />
       <View style={styles.buttonContainer}>
         <Button
           style={styles.button}
-          onPress={() => logInAsync({email, password})}>
-          Entrar
+          onPress={() => navigation.navigate('Register')}>
+          Cadastre-se
         </Button>
         <Button
           style={styles.button}
-          onPress={() => navigation.navigate('Register')}>
-          Cadastre-se
+          onPress={() => logInAsync({email, password})}>
+          Entrar
         </Button>
       </View>
     </View>

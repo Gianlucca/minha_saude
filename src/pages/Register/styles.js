@@ -4,9 +4,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },
-  buttonContainer: {justifyContent: 'center', alignItems: 'center'},
-  button: {
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     marginTop: 15,
+  },
+  button: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: '#000',
+    color: '#fff',
   },
   textInput: {
     marginLeft: 15,

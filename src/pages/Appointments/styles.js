@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Text, View, Button, FlatList, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,42 +7,40 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   row: {
-    backgroundColor: '#9f9f9f',
+    backgroundColor: '#8d99ae',
     borderRadius: 4,
-    flexDirection: 'row',
-    padding: 20,
+    flexDirection: 'column',
+    padding: 5,
     marginVertical: 8,
     marginHorizontal: 15,
     flex: 1,
   },
-  text: {
-    flex: 5,
-    color: '#fff',
+  detailRow: {
+    marginBottom: -5,
+    marginTop: -5,
+    justifyContent: 'flex-start',
+    alignContent: 'center',
     flexDirection: 'row',
+  },
+  text: {
+    color: '#edf2f4',
+    flexDirection: 'row',
+    fontSize: 18,
     justifyContent: 'center',
     alignContent: 'center',
-    fontSize: 18,
+    alignSelf: 'center',
     fontWeight: 'bold',
   },
-  details: {
-    lineHeight: 20,
-    color: '#fff',
+  rowIcon: {
+    justifyContent: 'flex-start',
+    alignSelf: 'center',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
-  icon: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignContent: 'center',
   },
   addButton: {
     width: 100,
     height: 100,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#2b2d42',
     borderRadius: 100,
-    borderWidth: 1,
     alignSelf: 'flex-end',
     position: 'absolute',
     bottom: 15,

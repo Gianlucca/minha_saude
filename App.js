@@ -77,21 +77,6 @@ function App() {
     return (
       <Drawer.Navigator initialRouteName="Home">
         <Drawer.Screen
-          name="Home"
-          component={Home}
-          options={{
-            title: 'Minha Saúde',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Drawer.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            title: 'Meu Perfil',
-          }}
-        />
-        <Drawer.Screen
           name="Appointments"
           component={Appointments}
           options={{
@@ -107,27 +92,46 @@ function App() {
             headerTitleAlign: 'center',
           }}
         />
+
         <Drawer.Screen
-          name="Vaccines"
-          component={Vaccines}
+          name="Timeline"
+          component={Timeline}
           options={{
-            title: 'Vacinas',
+            title: 'Linha do Tempo',
             headerTitleAlign: 'center',
           }}
         />
-        <Drawer.Screen
-          name="Relatives"
-          component={Relatives}
-          options={{
-            title: 'Parentes',
-            headerTitleAlign: 'center',
-          }}
-        />
+
         <Drawer.Screen
           name="Doctors"
           component={Doctors}
           options={{
             title: 'Médicos',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Drawer.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: 'Menu Principal',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Drawer.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            title: 'Meu Perfil',
+            headerTitleAlign: 'center',
+          }}
+        />
+
+        <Drawer.Screen
+          name="Relatives"
+          component={Relatives}
+          options={{
+            title: 'Parentes',
             headerTitleAlign: 'center',
           }}
         />
@@ -140,10 +144,10 @@ function App() {
           }}
         />
         <Drawer.Screen
-          name="Timeline"
-          component={Timeline}
+          name="Vaccines"
+          component={Vaccines}
           options={{
-            title: 'Linha do Tempo',
+            title: 'Vacinas',
             headerTitleAlign: 'center',
           }}
         />
@@ -183,7 +187,8 @@ function App() {
                   name="AddVaccines"
                   component={AddVaccines}
                   options={{
-                    headerShown: false,
+                    title: 'Cadastro de Vacina',
+                    headerTitleAlign: 'center',
                   }}
                 />
                 <Stack.Screen
@@ -211,7 +216,8 @@ function App() {
                   name="AddAppointments"
                   component={AddAppointments}
                   options={{
-                    headerShown: false,
+                    title: 'Cadastro de Compromisso',
+                    headerTitleAlign: 'center',
                   }}
                 />
               </Stack.Group>

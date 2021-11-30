@@ -35,18 +35,32 @@ export default function Appointments({navigation}) {
         keyExtractor={item => item._id}
         renderItem={({item}) => (
           <View style={styles.row}>
-            <View>
+            <View style={styles.detailRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="calendar-clock"
+                color="#edf2f4"
+              />
               <Text style={styles.text}>
-                {moment(item.date).format('DD/MM/YYYY HH:MM')} - {item.address}
+                {moment(item.date).format('DD/MM/YYYY HH:MM')}
               </Text>
-              <Text style={styles.text}>{item.details}</Text>
             </View>
-            <IconButton
-              style={styles.icon}
-              icon="calendar"
-              color="#fff"
-              size={30}
-            />
+
+            <View style={styles.detailRow}>
+              <IconButton style={styles.rowIcon} icon="city" color="#edf2f4" />
+              <Text style={styles.text}>{item.address}</Text>
+            </View>
+
+            {item.details !== '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="comment-processing"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{String(item.details).trim()}</Text>
+              </View>
+            )}
           </View>
         )}
       />
@@ -54,6 +68,7 @@ export default function Appointments({navigation}) {
         onPress={() => navigation.navigate('AddAppointments')}
         icon="plus"
         size={30}
+        color="#edf2f4"
         style={styles.addButton}
       />
     </SafeAreaView>

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
+import {Button, Text, TextInput, IconButton} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {
   View,
@@ -9,12 +9,12 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
-import styles from './styles.js';
 import AppContext from '../../components/AppContext';
 import {getRealmApp} from '../../services/realm-config';
 import {useIsFocused} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-date-picker';
+import styles from './styles.js';
 
 export default function AddAppointments({navigation}) {
   const [date, setDate] = useState(new Date());
@@ -52,10 +52,9 @@ export default function AddAppointments({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={{flex: 1}}>
-            <Text style={styles.headerText}>Cadastrar novo Compromisso</Text>
             <View style={styles.container}>
               <DatePicker
-                style={styles.textInput}
+                style={styles.picker}
                 mode="date"
                 textColor="#000"
                 date={date}
@@ -65,7 +64,7 @@ export default function AddAppointments({navigation}) {
                 }}
               />
               <DatePicker
-                style={styles.textInput}
+                style={styles.picker}
                 mode="time"
                 textColor="#000"
                 date={date}
@@ -75,47 +74,78 @@ export default function AddAppointments({navigation}) {
                 }}
               />
             </View>
-            <Picker
-              dropdownIconColor="#888"
-              style={styles.picker}
-              selectedValue={doctor}
-              onValueChange={(itemValue, itemIndex) => {
-                if (itemValue !== '0') {
-                  const doc = allDoctors.find(docs => itemValue == docs._id);
-                  if (!!doc && !!doc.address) {
-                    setAddress(doc.address);
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="doctor"
+                color="#2b2d42"
+              />
+              <Picker
+                dropdownIconColor="#888"
+                style={styles.picker}
+                selectedValue={doctor}
+                onValueChange={(itemValue, itemIndex) => {
+                  if (itemValue !== '0') {
+                    const doc = allDoctors.find(docs => itemValue == docs._id);
+                    if (!!doc && !!doc.address) {
+                      setAddress(doc.address);
+                    }
+                    setDoctor(doc._id);
+                  } else {
+                    setDoctor('0');
                   }
-                  setDoctor(doc._id);
-                } else {
-                  setDoctor('0');
-                }
-              }}>
-              {!!allDoctors &&
-                allDoctors.map((doctor, index) => {
-                  return (
-                    <Picker.Item
-                      key={index}
-                      label={doctor.name}
-                      value={doctor._id}
-                    />
-                  );
-                })}
-              <Picker.Item label="Outro" value="0" />
-            </Picker>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Local"
-              value={address}
-              onChangeText={setAddress}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Anotações"
-              value={details}
-              onChangeText={setDetails}
-              multiline={true}
-              numberOfLines={6}
-            />
+                }}>
+                {!!allDoctors &&
+                  allDoctors.map((doctor, index) => {
+                    return (
+                      <Picker.Item
+                        key={index}
+                        label={doctor.name}
+                        value={doctor._id}
+                      />
+                    );
+                  })}
+                <Picker.Item label="Outro" value="0" />
+              </Picker>
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="map-marker"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Local"
+                value={address}
+                onChangeText={setAddress}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="pencil"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Anotações"
+                value={details}
+                onChangeText={setDetails}
+                multiline={true}
+                numberOfLines={12}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
             <View style={styles.buttonContainer}>
               <Button style={styles.button} onPress={() => navigation.goBack()}>
                 Voltar
