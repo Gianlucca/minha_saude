@@ -63,15 +63,14 @@ export default function Profile({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={{flex: 1}}>
-            <Text style={styles.headerText}>Meu Perfil</Text>
             <TextInput
               style={styles.textInput}
               placeholder="Nome"
               value={name}
               onChangeText={setName}
             />
+            <Text style={styles.label}>Data de Nascimento:</Text>
             <View style={styles.container}>
-              <Text style={styles.label}>Data de Nascimento:</Text>
               <DatePicker
                 style={styles.textInput}
                 mode="date"

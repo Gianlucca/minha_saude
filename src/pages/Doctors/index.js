@@ -33,13 +33,84 @@ export default function Doctors({navigation}) {
         data={doctors}
         renderItem={({item}) => (
           <View style={styles.row}>
-            <IconButton
-              style={styles.icon}
-              color="#fff"
-              icon="account"
-              size={30}
-            />
-            <Text style={styles.text}>{item.name}</Text>
+            <View style={styles.detailRow}>
+              <IconButton
+                style={styles.rowIcon}
+                color="#edf2f4"
+                icon="account"
+              />
+              <Text style={styles.text}>{item.name}</Text>
+            </View>
+            {item.phone != '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="phone"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.phone}</Text>
+              </View>
+            )}
+            {item.address != '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="map-marker"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.address}</Text>
+              </View>
+            )}
+            {item.email != '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="email"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.email}</Text>
+              </View>
+            )}
+            {item.speciality != '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="doctor"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.speciality}</Text>
+              </View>
+            )}
+            {item.crm != '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="identifier"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.crm}</Text>
+              </View>
+            )}
+            {item.clinic_name != '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="hospital-building"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.clinic_name}</Text>
+              </View>
+            )}
+            {item.details !== '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="comment-processing"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{String(item.details).trim()}</Text>
+              </View>
+            )}
           </View>
         )}
         keyExtractor={item => item._id}
@@ -48,6 +119,7 @@ export default function Doctors({navigation}) {
         onPress={() => navigation.navigate('AddDoctors')}
         icon="plus"
         size={30}
+        color="#edf2f4"
         style={styles.addButton}
       />
     </SafeAreaView>

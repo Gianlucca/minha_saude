@@ -56,7 +56,6 @@ export default function AddAppointments({navigation}) {
               <DatePicker
                 style={styles.picker}
                 mode="date"
-                textColor="#000"
                 date={date}
                 androidVariant="nativeAndroid"
                 onDateChange={date => {
@@ -66,7 +65,6 @@ export default function AddAppointments({navigation}) {
               <DatePicker
                 style={styles.picker}
                 mode="time"
-                textColor="#000"
                 date={date}
                 androidVariant="nativeAndroid"
                 onDateChange={time => {
@@ -95,6 +93,7 @@ export default function AddAppointments({navigation}) {
                     setDoctor('0');
                   }
                 }}>
+                <Picker.Item label="Selecione um médico" value="0" />
                 {!!allDoctors &&
                   allDoctors.map((doctor, index) => {
                     return (
@@ -105,7 +104,6 @@ export default function AddAppointments({navigation}) {
                       />
                     );
                   })}
-                <Picker.Item label="Outro" value="0" />
               </Picker>
             </View>
             <View style={styles.inputRow}>

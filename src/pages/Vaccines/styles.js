@@ -15,18 +15,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     flex: 1,
   },
-  headerText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginBottom: 5,
+  detailRow: {
+    marginBottom: -5,
+    marginTop: -5,
+    justifyContent: 'flex-start',
+    alignContent: 'center',
+    flexDirection: 'row',
   },
   text: {
     color: '#edf2f4',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignContent: 'center',
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
+    fontWeight: 'bold',
     fontSize: 18,
   },
   icon: {
@@ -34,6 +36,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignSelf: 'center',
     alignContent: 'center',
+  },
+  rowIcon: {
+    justifyContent: 'flex-start',
+    alignSelf: 'center',
+    flexDirection: 'row',
   },
   addButton: {
     width: 100,

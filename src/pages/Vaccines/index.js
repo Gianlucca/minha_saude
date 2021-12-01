@@ -32,31 +32,64 @@ export default function Vaccines({navigation}) {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={vaccines}
+        keyExtractor={item => item._id}
         renderItem={({item}) => {
           let base64Icon = `data:image/png;base64,${item.file}`;
           return (
             <View style={styles.row}>
-              <IconButton
-                style={styles.icon}
-                icon="needle"
-                color="#fff"
-                size={30}
-              />
-              <View>
-                <Text style={styles.headerText}>{item.name}</Text>
-                <Text style={styles.text}>Lote: {item.batch}</Text>
-                <Text style={styles.text}>Local: {item.address}</Text>
+              <View
+                style={{
+                  flexDirection: 'column',
+                }}>
+                <View style={styles.detailRow}>
+                  <IconButton
+                    style={styles.rowIcon}
+                    icon="needle"
+                    color="#edf2f4"
+                  />
+                  <Text style={styles.text}>{item.name}</Text>
+                </View>
+                <View style={styles.detailRow}>
+                  <IconButton
+                    style={styles.rowIcon}
+                    icon="package-variant-closed"
+                    color="#edf2f4"
+                  />
+                  <Text style={styles.text}>{item.batch}</Text>
+                </View>
+                <View style={styles.detailRow}>
+                  <IconButton
+                    style={styles.rowIcon}
+                    icon="hospital-building"
+                    color="#edf2f4"
+                  />
+                  <Text style={styles.text}>{item.address}</Text>
+                </View>
                 {item.date != '' && (
-                  <Text style={styles.text}>
-                    Date: {moment(item.date).format('DD-MM-YYYY')}
-                  </Text>
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="calendar"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>
+                      {moment(item.date).format('DD-MM-YYYY')}
+                    </Text>
+                  </View>
                 )}
               </View>
-              <Image style={{flex: 1, width: 50}} source={{uri: base64Icon}} />
+
+              <Image
+                style={{
+                  flex: 1,
+                  width: 50,
+                  margin: 10,
+                }}
+                source={{uri: base64Icon}}
+              />
             </View>
           );
         }}
-        keyExtractor={item => item._id}
       />
       <IconButton
         onPress={() => navigation.navigate('AddVaccines')}

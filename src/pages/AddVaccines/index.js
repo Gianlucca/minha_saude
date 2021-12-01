@@ -14,6 +14,7 @@ import AppContext from '../../components/AppContext';
 import LoadingComponent from '../../components/LoadingComponent';
 import {getRealmApp} from '../../services/realm-config';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import moment from 'moment';
 
 export default function AddVaccines({navigation}) {
   const [file, setFile] = useState({filename: '', base64: ''});
@@ -29,6 +30,7 @@ export default function AddVaccines({navigation}) {
   const createVaccine = async data => {
     setIsLoading(true);
     data.id = myContext.userToken;
+    data.date = moment(date, 'DD-MM-YYYY').toDate();
     await app.currentUser.functions.createVaccine(data);
     navigation.navigate('Vaccines');
     setIsLoading(false);

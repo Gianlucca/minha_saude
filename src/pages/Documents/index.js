@@ -1,76 +1,109 @@
-import React, {useState, useEffect} from 'react';
-import {View, FlatList, StatusBar} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {View, FlatList, StatusBar, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
+import AppContext from '../../components/AppContext';
+import {getRealmApp} from '../../services/realm-config';
+import {useIsFocused} from '@react-navigation/native';
+import moment from 'moment';
 import styles from './styles.js';
 
 export default function Documents({navigation}) {
   const [documents, setDocuments] = useState([]);
+  const isFocused = useIsFocused();
+  const myContext = useContext(AppContext);
+  const app = getRealmApp();
 
   useEffect(() => {
-    //refresh all Documents when page loads
-  }, []);
+    //refresh all documents when page loads
+    const fetchAllDocuments = async () => {
+      let allDocuments = await app.currentUser.functions.fetchAllDocuments(
+        myContext.userToken,
+      );
+      console.log('fetching all documents');
+      setDocuments(allDocuments);
+    };
+    if (isFocused) {
+      fetchAllDocuments();
+    }
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={[
-          {
-            id: '0',
-            file: 'image.jpg',
-            title: 'exame raio x',
-            date: '12/12/2020',
-            category: 'raio x',
-            details: 'aquele raio x la',
-          },
-          {
-            id: '1',
-            file: 'image.jpg',
-            title: 'exame raio x',
-            date: '12/12/2020',
-            category: 'raio x',
-            details: 'aquele raio x la',
-          },
-          {
-            id: '2',
-            file: 'image.jpg',
-            title: 'exame raio x',
-            date: '12/12/2020',
-            category: 'raio x',
-            details: 'aquele raio x la',
-          },
-          {
-            id: '3',
-            file: 'image.jpg',
-            title: 'exame raio x',
-            date: '12/12/2020',
-            category: 'raio x',
-            details: 'aquele raio x la',
-          },
-        ]}
-        renderItem={({item}) => (
-          <View style={styles.row}>
-            <IconButton
-              style={styles.icon}
-              icon="file"
-              color="#fff"
-              size={30}
-            />
-            <View>
-              <Text style={styles.headerText}>
-                {item.date} - {item.title}
-              </Text>
-              <Text style={styles.text}>Categoria: {item.category}</Text>
-              <Text style={styles.text}>Detalhes: {item.details}</Text>
+        data={documents}
+        keyExtractor={item => item._id}
+        renderItem={({item}) => {
+          let base64Icon = `data:image/png;base64,${item.file}`;
+          return (
+            <View style={styles.row}>
+              <View
+                style={{
+                  flexDirection: 'column',
+                }}>
+                {item.title !== '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="file-document"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.title}</Text>
+                  </View>
+                )}
+                {item.date != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="calendar"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>
+                      {moment(item.date).format('DD-MM-YYYY')}
+                    </Text>
+                  </View>
+                )}
+                {item.category !== '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="format-list-bulleted-type"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.category}</Text>
+                  </View>
+                )}
+                {item.details !== '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="comment-processing"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>
+                      {String(item.details).trim()}
+                    </Text>
+                  </View>
+                )}
+              </View>
+
+              <Image
+                style={{
+                  flex: 1,
+                  width: 50,
+                  margin: 10,
+                }}
+                source={{uri: base64Icon}}
+              />
             </View>
-          </View>
-        )}
-        keyExtractor={item => item.id}
+          );
+        }}
       />
       <IconButton
         onPress={() => navigation.navigate('AddDocuments')}
         icon="plus"
         size={30}
+        color="#edf2f4"
         style={styles.addButton}
       />
     </SafeAreaView>

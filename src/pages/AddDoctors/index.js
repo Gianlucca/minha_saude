@@ -39,7 +39,6 @@ export default function AddDoctors({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={{flex: 1}}>
-            <Text style={styles.headerText}>Cadastrar novo Médico</Text>
             <View style={styles.container}>
               <TextInput
                 style={styles.textInput}

@@ -180,7 +180,8 @@ function App() {
                   name="AddDocuments"
                   component={AddDocuments}
                   options={{
-                    headerShown: false,
+                    title: 'Cadastro de Documento',
+                    headerTitleAlign: 'center',
                   }}
                 />
                 <Stack.Screen
@@ -202,14 +203,16 @@ function App() {
                   name="AddDoctors"
                   component={AddDoctors}
                   options={{
-                    headerShown: false,
+                    title: 'Cadastro de Médico',
+                    headerTitleAlign: 'center',
                   }}
                 />
                 <Stack.Screen
                   name="AddMedicines"
                   component={AddMedicines}
                   options={{
-                    headerShown: false,
+                    title: 'Cadastro de Remédio',
+                    headerTitleAlign: 'center',
                   }}
                 />
                 <Stack.Screen
@@ -228,14 +231,13 @@ function App() {
                 options={{
                   headerShown: false,
                 }}
-              /> // We haven't finished checking for the token yet
+              />
             ) : (
               <Stack.Group>
                 <Stack.Screen
                   name="Login"
                   component={Login}
                   options={{
-                    // When logging out, a pop animation feels intuitive
                     animationTypeForReplace: isSignout ? 'pop' : 'push',
                     headerShown: false,
                   }}
