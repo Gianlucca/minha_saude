@@ -26,6 +26,7 @@ import {
   AddAppointments,
   AddMedicines,
 } from './src/pages';
+import ImageModal from './src/components/ImageModal';
 
 function App() {
   LogBox.disableYellowBox = true;
@@ -176,6 +177,11 @@ function App() {
                 <Stack.Screen
                   name="Drawer"
                   component={DrawerComponent}
+                  options={{headerShown: false}}
+                />
+                <Stack.Screen
+                  name="ImageModal"
+                  component={ImageModal}
                   options={{headerShown: false}}
                 />
                 <Stack.Screen

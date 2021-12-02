@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {View, FlatList, StatusBar, Image} from 'react-native';
+import {View, FlatList, Image, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
 import AppContext from '../../components/AppContext';
@@ -93,15 +93,26 @@ export default function Vaccines({navigation}) {
                 )}
               </View>
               {item.file != '' && (
-                <Image
+                <TouchableOpacity
                   style={{
                     flex: 1,
-                    width: 50,
                     margin: 10,
                     minHeight: 150,
                   }}
-                  source={{uri: base64Icon}}
-                />
+                  onPress={() => {
+                    navigation.navigate('ImageModal', {
+                      base64Icon,
+                    });
+                  }}>
+                  <Image
+                    style={{
+                      flex: 1,
+                      margin: 10,
+                      minHeight: 150,
+                    }}
+                    source={{uri: base64Icon}}
+                  />
+                </TouchableOpacity>
               )}
               <IconButton
                 style={{
