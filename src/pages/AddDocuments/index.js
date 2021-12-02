@@ -109,7 +109,7 @@ export default function AddDocuments({navigation}) {
                 style={styles.textInput}
                 placeholder="Título"
                 value={title}
-                onChangeText={setCategory}
+                onChangeText={setTitle}
                 outlineColor="#2B2D42"
                 selectionColor="#8d99ae"
                 activeOutlineColor="#ef233c"

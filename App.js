@@ -29,7 +29,7 @@ import {
 import ImageModal from './src/components/ImageModal';
 
 function App() {
-  LogBox.disableYellowBox = true;
+  LogBox.ignoreLogs(['Warning: ...']);
   const [isLoading, setIsLoading] = useState(true);
   const [isSignout, setIsSignout] = useState(false);
   const [userToken, setUserToken] = useState('');
