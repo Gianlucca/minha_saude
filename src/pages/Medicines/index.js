@@ -3,6 +3,7 @@ import {View, FlatList, StatusBar, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {IconButton, Text} from 'react-native-paper';
 import styles from './styles.js';
+import moment from 'moment';
 import AppContext from '../../components/AppContext';
 import {getRealmApp} from '../../services/realm-config';
 import {useIsFocused} from '@react-navigation/native';
@@ -30,38 +31,78 @@ export default function Medicines({navigation}) {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={medicines}
+        keyExtractor={item => item._id}
         renderItem={({item}) => {
           let base64Icon = `data:image/png;base64,${item.file}`;
           return (
             <View style={styles.row}>
-              <IconButton
-                style={styles.icon}
-                icon="pill"
-                color="#fff"
-                size={30}
-              />
-              <View>
-                <Text style={styles.headerText}>{item.name}</Text>
-                <View>
-                  <Text style={styles.text}>Dosagem: {item.dosage}</Text>
-                  <Text style={styles.text}>
-                    Comprimidos restantes: {item.how_many_pills}
-                  </Text>
-                  <Text style={styles.text}>
-                    Data de Validade: {item.exp_date}
-                  </Text>
-                </View>
+              <View
+                style={{
+                  flexDirection: 'column',
+                }}>
+                {item.name != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="medical-bag"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.name}</Text>
+                  </View>
+                )}
+                {item.dosage != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="beer"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.dosage}</Text>
+                  </View>
+                )}
+                {item.how_many_pills != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="pill"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.how_many_pills}</Text>
+                  </View>
+                )}
+                {item.exp_date != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="calendar-check"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>
+                      {moment(item.exp_date).format('DD-MM-YYYY')}
+                    </Text>
+                  </View>
+                )}
               </View>
-              <Image style={{flex: 1, width: 50}} source={{uri: base64Icon}} />
+              {item.file != '' && (
+                <Image
+                  style={{
+                    flex: 1,
+                    width: 50,
+                    margin: 10,
+                    minHeight: 150,
+                  }}
+                  source={{uri: base64Icon}}
+                />
+              )}
             </View>
           );
         }}
-        keyExtractor={item => item._id}
       />
       <IconButton
         onPress={() => navigation.navigate('AddMedicines')}
         icon="plus"
         size={30}
+        color="#edf2f4"
         style={styles.addButton}
       />
     </SafeAreaView>

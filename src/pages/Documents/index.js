@@ -87,14 +87,17 @@ export default function Documents({navigation}) {
                 )}
               </View>
 
-              <Image
-                style={{
-                  flex: 1,
-                  width: 50,
-                  margin: 10,
-                }}
-                source={{uri: base64Icon}}
-              />
+              {item.file != '' && (
+                <Image
+                  style={{
+                    flex: 1,
+                    width: 50,
+                    margin: 10,
+                    minHeight: 150,
+                  }}
+                  source={{uri: base64Icon}}
+                />
+              )}
             </View>
           );
         }}

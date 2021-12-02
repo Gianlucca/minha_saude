@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Button, Text, TextInput, Checkbox} from 'react-native-paper';
+import {Button, Text, TextInput, IconButton} from 'react-native-paper';
 import {ScrollView} from 'react-native-gesture-handler';
 import {getRealmApp} from '../../services/realm-config';
 import {
@@ -10,6 +10,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
+import moment from 'moment';
 import styles from './styles.js';
 import AppContext from '../../components/AppContext';
 
@@ -39,58 +40,146 @@ export default function AddDoctors({navigation}) {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView>
           <View style={{flex: 1}}>
-            <View style={styles.container}>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="account"
+                color="#2b2d42"
+              />
+
               <TextInput
                 style={styles.textInput}
                 placeholder="Nome"
                 value={name}
                 onChangeText={setName}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
               />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton style={styles.rowIcon} icon="phone" color="#2b2d42" />
+
               <TextInput
                 style={styles.textInput}
                 placeholder="Telefone"
                 value={phone}
                 onChangeText={setPhone}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
               />
             </View>
-            <TextInput
-              style={styles.textInput}
-              placeholder="E-mail"
-              value={email}
-              onChangeText={setEmail}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Especialidade"
-              value={speciality}
-              onChangeText={setSpeciality}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="CRM"
-              value={crm}
-              onChangeText={setCrm}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Endereço"
-              value={address}
-              onChangeText={setAddress}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Nome da Clínica"
-              value={clinicName}
-              onChangeText={setClinicName}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Anotações"
-              value={details}
-              onChangeText={setDetails}
-              multiline={true}
-              numberOfLines={6}
-            />
+            <View style={styles.inputRow}>
+              <IconButton style={styles.rowIcon} icon="email" color="#2b2d42" />
+              <TextInput
+                style={styles.textInput}
+                placeholder="E-mail"
+                value={email}
+                onChangeText={setEmail}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="doctor"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Especialidade"
+                value={speciality}
+                onChangeText={setSpeciality}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="identifier"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="CRM"
+                value={crm}
+                onChangeText={setCrm}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="map-marker"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Endereço"
+                value={address}
+                onChangeText={setAddress}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="hospital-building"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Nome da Clínica"
+                value={clinicName}
+                onChangeText={setClinicName}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <IconButton
+                style={styles.rowIcon}
+                icon="pencil"
+                color="#2b2d42"
+              />
+              <TextInput
+                style={styles.textInput}
+                placeholder="Anotações"
+                value={details}
+                onChangeText={setDetails}
+                multiline={true}
+                numberOfLines={6}
+                outlineColor="#2B2D42"
+                selectionColor="#8d99ae"
+                activeOutlineColor="#ef233c"
+                underlineColor="#2B2D42"
+                placeholderTextColor="#8d99ae"
+              />
+            </View>
             <View style={styles.buttonContainer}>
               <Button style={styles.button} onPress={() => navigation.goBack()}>
                 Voltar

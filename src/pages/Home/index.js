@@ -1,128 +1,169 @@
-import * as React from 'react';
-import SecureStore from 'react-native-sensitive-info';
-import {Text, View, Button, FlatList, StatusBar} from 'react-native';
-import AppContext from '../../components/AppContext';
+import React, {useState, useEffect, useContext} from 'react';
+import {View, FlatList, StatusBar, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {IconButton, Text} from 'react-native-paper';
 import styles from './styles.js';
+import moment from 'moment';
+import AppContext from '../../components/AppContext';
+import {getRealmApp} from '../../services/realm-config';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function Home({navigation}) {
-  const myContext = React.useContext(AppContext);
+  const [appointments, setAppointments] = useState([]);
+  const [medicines, setMedicines] = useState([]);
+  const isFocused = useIsFocused();
+  const myContext = useContext(AppContext);
+  const app = getRealmApp();
 
-  const [upcomingTasks, setUpcomingTasks] = React.useState([]);
-
-  React.useEffect(() => {
-    //
-  }, []);
+  useEffect(() => {
+    const fetchAllAppointments = async () => {
+      let allAppointments =
+        await app.currentUser.functions.fetchAllAppointments(
+          myContext.userToken,
+        );
+      console.log('fetching all appointments');
+      setAppointments(allAppointments);
+    };
+    const fetchAllMedicines = async () => {
+      let allMedicines = await app.currentUser.functions.fetchAllMedicines(
+        myContext.userToken,
+      );
+      console.log('fetching all medicines');
+      setMedicines(allMedicines);
+    };
+    if (isFocused) {
+      fetchAllAppointments();
+      fetchAllMedicines();
+    }
+  }, [isFocused]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={[
-          {
-            id: '0',
-            date: '02/11/2021',
-            doctorId: 1,
-            address: 'Av Carlos Gomes 888',
-            details: 'é na sala 903',
-          },
-          {
-            id: '1',
-            date: '02/12/2021',
-            doctorId: 3,
-            address: 'Av Nilo Peçanha 99',
-            details: 'é na sala 807',
-          },
-          {
-            id: '2',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '3',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '4',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '5',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '6',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '7',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '8',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '9',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '10',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '11',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-          {
-            id: '12',
-            date: '03/01/2022',
-            doctorId: 6,
-            address: 'Av Bento Gonçalves 965',
-            details: 'é na sala 20',
-          },
-        ]}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <>
-            <View style={styles.headerText}>
-              <Text style={styles.headerText}>{item.date}</Text>
-            </View>
-            <View style={styles.row}>
-              <Text style={styles.text}>{item.address}</Text>
-              <Text style={styles.text}>{item.details}</Text>
-            </View>
-          </>
-        )}
-      />
+      {appointments.length > 1 && (
+        <>
+          <Text style={styles.header}>Próximos Compromissos</Text>
+          <FlatList
+            data={appointments}
+            keyExtractor={item => item._id}
+            renderItem={({item}) =>
+              moment() < moment(item.date) && (
+                <View style={styles.row}>
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="calendar-clock"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>
+                      {moment(item.date).format('DD/MM/YYYY HH:MM')}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="city"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.address}</Text>
+                  </View>
+
+                  {item.details !== '' && (
+                    <View style={styles.detailRow}>
+                      <IconButton
+                        style={styles.rowIcon}
+                        icon="comment-processing"
+                        color="#edf2f4"
+                      />
+                      <Text style={styles.text}>
+                        {String(item.details).trim()}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              )
+            }
+          />
+        </>
+      )}
+      {medicines.length > 1 && (
+        <>
+          <Text style={styles.header}>
+            Remédios dentro do prazo de validade
+          </Text>
+          <FlatList
+            data={medicines}
+            keyExtractor={item => item._id}
+            renderItem={({item}) => {
+              let base64Icon = `data:image/png;base64,${item.file}`;
+              return (
+                moment() < moment(item.exp_date) && (
+                  <View style={styles.medicineRow}>
+                    <View
+                      style={{
+                        flexDirection: 'column',
+                      }}>
+                      {item.name != '' && (
+                        <View style={styles.detailRow}>
+                          <IconButton
+                            style={styles.rowIcon}
+                            icon="medical-bag"
+                            color="#edf2f4"
+                          />
+                          <Text style={styles.text}>{item.name}</Text>
+                        </View>
+                      )}
+                      {item.dosage != '' && (
+                        <View style={styles.detailRow}>
+                          <IconButton
+                            style={styles.rowIcon}
+                            icon="beer"
+                            color="#edf2f4"
+                          />
+                          <Text style={styles.text}>{item.dosage}</Text>
+                        </View>
+                      )}
+                      {item.how_many_pills != '' && (
+                        <View style={styles.detailRow}>
+                          <IconButton
+                            style={styles.rowIcon}
+                            icon="pill"
+                            color="#edf2f4"
+                          />
+                          <Text style={styles.text}>{item.how_many_pills}</Text>
+                        </View>
+                      )}
+                      {item.exp_date != '' && (
+                        <View style={styles.detailRow}>
+                          <IconButton
+                            style={styles.rowIcon}
+                            icon="calendar-check"
+                            color="#edf2f4"
+                          />
+                          <Text style={styles.text}>
+                            {moment(item.exp_date).format('DD-MM-YYYY')}
+                          </Text>
+                        </View>
+                      )}
+                    </View>
+                    {item.file != '' && (
+                      <Image
+                        style={{
+                          flex: 1,
+                          width: 50,
+                          margin: 10,
+                          minHeight: 150,
+                        }}
+                        source={{uri: base64Icon}}
+                      />
+                    )}
+                  </View>
+                )
+              );
+            }}
+          />
+        </>
+      )}
     </SafeAreaView>
   );
 }

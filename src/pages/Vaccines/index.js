@@ -41,30 +41,36 @@ export default function Vaccines({navigation}) {
                 style={{
                   flexDirection: 'column',
                 }}>
-                <View style={styles.detailRow}>
-                  <IconButton
-                    style={styles.rowIcon}
-                    icon="needle"
-                    color="#edf2f4"
-                  />
-                  <Text style={styles.text}>{item.name}</Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <IconButton
-                    style={styles.rowIcon}
-                    icon="package-variant-closed"
-                    color="#edf2f4"
-                  />
-                  <Text style={styles.text}>{item.batch}</Text>
-                </View>
-                <View style={styles.detailRow}>
-                  <IconButton
-                    style={styles.rowIcon}
-                    icon="hospital-building"
-                    color="#edf2f4"
-                  />
-                  <Text style={styles.text}>{item.address}</Text>
-                </View>
+                {item.name != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="needle"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.name}</Text>
+                  </View>
+                )}
+                {item.batch != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="package-variant-closed"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.batch}</Text>
+                  </View>
+                )}
+                {item.address != '' && (
+                  <View style={styles.detailRow}>
+                    <IconButton
+                      style={styles.rowIcon}
+                      icon="hospital-building"
+                      color="#edf2f4"
+                    />
+                    <Text style={styles.text}>{item.address}</Text>
+                  </View>
+                )}
                 {item.date != '' && (
                   <View style={styles.detailRow}>
                     <IconButton
@@ -79,14 +85,17 @@ export default function Vaccines({navigation}) {
                 )}
               </View>
 
-              <Image
-                style={{
-                  flex: 1,
-                  width: 50,
-                  margin: 10,
-                }}
-                source={{uri: base64Icon}}
-              />
+              {item.file != '' && (
+                <Image
+                  style={{
+                    flex: 1,
+                    width: 50,
+                    margin: 10,
+                    minHeight: 150,
+                  }}
+                  source={{uri: base64Icon}}
+                />
+              )}
             </View>
           );
         }}

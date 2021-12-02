@@ -9,6 +9,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
 } from 'react-native';
+import moment from 'moment';
 import styles from './styles.js';
 import AppContext from '../../components/AppContext';
 import LoadingComponent from '../../components/LoadingComponent';
@@ -30,6 +31,7 @@ export default function addMedicines({navigation}) {
     //create new medicine
     setIsLoading(true);
     data.id = myContext.userToken;
+    data.expDate = moment(expDate, 'DD-MM-YYYY').toDate();
     await app.currentUser.functions.createMedicine(data);
     console.log(data);
     navigation.navigate('Medicines');
@@ -45,8 +47,12 @@ export default function addMedicines({navigation}) {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView>
             <View style={{flex: 1}}>
-              <Text style={styles.headerText}>Cadastrar novo Remédio</Text>
-              <View style={styles.container}>
+              <View style={styles.inputRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="image"
+                  color="#2b2d42"
+                />
                 <TextInput
                   style={styles.textInput}
                   placeholder="Selecione uma Imagem"
@@ -56,7 +62,7 @@ export default function addMedicines({navigation}) {
                 <IconButton
                   style={styles.iconButton}
                   icon="camera"
-                  color="#000"
+                  color="#edf2f4"
                   size={30}
                   onPress={() =>
                     launchCamera(
@@ -79,7 +85,7 @@ export default function addMedicines({navigation}) {
                 <IconButton
                   style={styles.iconButton}
                   icon="file"
-                  color="#000"
+                  color="#edf2f4"
                   size={30}
                   onPress={() =>
                     launchImageLibrary(
@@ -100,43 +106,103 @@ export default function addMedicines({navigation}) {
                   }
                 />
               </View>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Nome do Remédio"
-                value={name}
-                onChangeText={setName}
-              />
-              <TextInput
-                style={{
-                  flex: 1,
-                  marginLeft: 15,
-                  marginRight: 15,
-                  marginTop: 15,
-                }}
-                placeholder="Dosagem"
-                value={dosage}
-                onChangeText={setDosage}
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Quantidade de comprimidos"
-                value={howManyPills}
-                onChangeText={setHowManyPills}
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Data de Validade"
-                value={expDate}
-                onChangeText={setExpDate}
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder="Anotações"
-                value={details}
-                onChangeText={setDetails}
-                multiline={true}
-                numberOfLines={6}
-              />
+
+              <View style={styles.inputRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="medical-bag"
+                  color="#2b2d42"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Nome do Remédio"
+                  value={name}
+                  onChangeText={setName}
+                  outlineColor="#2B2D42"
+                  selectionColor="#8d99ae"
+                  activeOutlineColor="#ef233c"
+                  underlineColor="#2B2D42"
+                  placeholderTextColor="#8d99ae"
+                />
+              </View>
+
+              <View style={styles.inputRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="beer"
+                  color="#2b2d42"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Dosagem"
+                  value={dosage}
+                  onChangeText={setDosage}
+                  outlineColor="#2B2D42"
+                  selectionColor="#8d99ae"
+                  activeOutlineColor="#ef233c"
+                  underlineColor="#2B2D42"
+                  placeholderTextColor="#8d99ae"
+                />
+              </View>
+
+              <View style={styles.inputRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="pill"
+                  color="#2b2d42"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Quantidade de comprimidos"
+                  value={howManyPills}
+                  onChangeText={setHowManyPills}
+                  outlineColor="#2B2D42"
+                  selectionColor="#8d99ae"
+                  activeOutlineColor="#ef233c"
+                  underlineColor="#2B2D42"
+                  placeholderTextColor="#8d99ae"
+                />
+              </View>
+
+              <View style={styles.inputRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="calendar-check"
+                  color="#2b2d42"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Data de Validade"
+                  value={expDate}
+                  onChangeText={setExpDate}
+                  outlineColor="#2B2D42"
+                  selectionColor="#8d99ae"
+                  activeOutlineColor="#ef233c"
+                  underlineColor="#2B2D42"
+                  placeholderTextColor="#8d99ae"
+                />
+              </View>
+
+              <View style={styles.inputRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="pencil"
+                  color="#2b2d42"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Anotações"
+                  value={details}
+                  onChangeText={setDetails}
+                  multiline={true}
+                  numberOfLines={12}
+                  outlineColor="#2B2D42"
+                  selectionColor="#8d99ae"
+                  activeOutlineColor="#ef233c"
+                  underlineColor="#2B2D42"
+                  placeholderTextColor="#8d99ae"
+                />
+              </View>
               <View style={styles.buttonContainer}>
                 <Button
                   style={styles.button}

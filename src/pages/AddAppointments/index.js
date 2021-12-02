@@ -15,6 +15,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-date-picker';
 import styles from './styles.js';
+import moment from 'moment';
 
 export default function AddAppointments({navigation}) {
   const [date, setDate] = useState(new Date());
