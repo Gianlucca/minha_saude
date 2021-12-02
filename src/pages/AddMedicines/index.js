@@ -31,7 +31,9 @@ export default function addMedicines({navigation}) {
     //create new medicine
     setIsLoading(true);
     data.id = myContext.userToken;
-    data.expDate = moment(expDate, 'DD-MM-YYYY').toDate();
+    if (!!expDate) {
+      data.expDate = moment(expDate, 'DD-MM-YYYY').toDate();
+    }
     await app.currentUser.functions.createMedicine(data);
     console.log(data);
     navigation.navigate('Medicines');

@@ -30,7 +30,9 @@ export default function AddVaccines({navigation}) {
   const createVaccine = async data => {
     setIsLoading(true);
     data.id = myContext.userToken;
-    data.date = moment(date, 'DD-MM-YYYY').toDate();
+    if (!!date) {
+      data.date = moment(date, 'DD-MM-YYYY').toDate();
+    }
     await app.currentUser.functions.createVaccine(data);
     navigation.navigate('Vaccines');
     setIsLoading(false);
