@@ -14,15 +14,22 @@ export default function Documents({navigation}) {
   const myContext = useContext(AppContext);
   const app = getRealmApp();
 
+  const deleteRow = async item => {
+    let id = item._id;
+    await app.currentUser.functions.deleteDocument({id}).then(async () => {
+      await fetchAllDocuments();
+    });
+  };
+
+  const fetchAllDocuments = async () => {
+    let allDocuments = await app.currentUser.functions.fetchAllDocuments(
+      myContext.userToken,
+    );
+    console.log('fetching all documents');
+    setDocuments(allDocuments);
+  };
+
   useEffect(() => {
-    //refresh all documents when page loads
-    const fetchAllDocuments = async () => {
-      let allDocuments = await app.currentUser.functions.fetchAllDocuments(
-        myContext.userToken,
-      );
-      console.log('fetching all documents');
-      setDocuments(allDocuments);
-    };
     if (isFocused) {
       fetchAllDocuments();
     }
@@ -98,6 +105,15 @@ export default function Documents({navigation}) {
                   source={{uri: base64Icon}}
                 />
               )}
+              <IconButton
+                style={{
+                  minHeight: 20,
+                  minWidth: 40,
+                }}
+                icon="delete"
+                color="#D90429"
+                onPress={() => deleteRow(item)}
+              />
             </View>
           );
         }}

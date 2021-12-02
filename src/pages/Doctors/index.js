@@ -14,15 +14,22 @@ export default function Doctors({navigation}) {
   const myContext = useContext(AppContext);
   const app = getRealmApp();
 
+  const deleteRow = async item => {
+    let id = item._id;
+    await app.currentUser.functions.deleteDoctor({id}).then(async () => {
+      await fetchAllDoctors();
+    });
+  };
+
+  const fetchAllDoctors = async () => {
+    let allDoctors = await app.currentUser.functions.fetchAllDoctors(
+      myContext.userToken,
+    );
+    console.log('fetching all doctors');
+    setDoctors(allDoctors);
+  };
+
   useEffect(() => {
-    //refresh all Doctors when page loads
-    const fetchAllDoctors = async () => {
-      let allDoctors = await app.currentUser.functions.fetchAllDoctors(
-        myContext.userToken,
-      );
-      console.log('fetching all doctors');
-      setDoctors(allDoctors);
-    };
     if (isFocused) {
       fetchAllDoctors();
     }
@@ -32,6 +39,7 @@ export default function Doctors({navigation}) {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={doctors}
+        keyExtractor={item => item._id}
         renderItem={({item}) => (
           <View style={styles.row}>
             <View style={styles.detailRow}>
@@ -112,9 +120,20 @@ export default function Doctors({navigation}) {
                 <Text style={styles.text}>{String(item.details).trim()}</Text>
               </View>
             )}
+
+            <IconButton
+              style={{
+                position: 'absolute',
+                alignSelf: 'flex-end',
+                minHeight: 20,
+                minWidth: 40,
+              }}
+              icon="delete"
+              color="#D90429"
+              onPress={() => deleteRow(item)}
+            />
           </View>
         )}
-        keyExtractor={item => item._id}
       />
       <IconButton
         onPress={() => navigation.navigate('AddDoctors')}

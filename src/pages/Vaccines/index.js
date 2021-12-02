@@ -14,15 +14,23 @@ export default function Vaccines({navigation}) {
   const myContext = useContext(AppContext);
   const app = getRealmApp();
 
+  const deleteRow = async item => {
+    let id = item._id;
+    await app.currentUser.functions.deleteVaccine({id}).then(async () => {
+      await fetchAllVaccines();
+    });
+  };
+
+  const fetchAllVaccines = async () => {
+    let allVaccines = await app.currentUser.functions.fetchAllVaccines(
+      myContext.userToken,
+    );
+    console.log('fetching all vaccines');
+    setVaccines(allVaccines);
+  };
+
   useEffect(() => {
     //refresh all Vaccines when page loads
-    const fetchAllVaccines = async () => {
-      let allVaccines = await app.currentUser.functions.fetchAllVaccines(
-        myContext.userToken,
-      );
-      console.log('fetching all vaccines');
-      setVaccines(allVaccines);
-    };
     if (isFocused) {
       fetchAllVaccines();
     }
@@ -84,7 +92,6 @@ export default function Vaccines({navigation}) {
                   </View>
                 )}
               </View>
-
               {item.file != '' && (
                 <Image
                   style={{
@@ -96,6 +103,15 @@ export default function Vaccines({navigation}) {
                   source={{uri: base64Icon}}
                 />
               )}
+              <IconButton
+                style={{
+                  minHeight: 20,
+                  minWidth: 40,
+                }}
+                icon="delete"
+                color="#D90429"
+                onPress={() => deleteRow(item)}
+              />
             </View>
           );
         }}

@@ -14,14 +14,22 @@ export default function Medicines({navigation}) {
   const myContext = useContext(AppContext);
   const app = getRealmApp();
 
+  const deleteRow = async item => {
+    let id = item._id;
+    await app.currentUser.functions.deleteMedicine({id}).then(async () => {
+      await fetchAllMedicines();
+    });
+  };
+
+  const fetchAllMedicines = async () => {
+    let allMedicines = await app.currentUser.functions.fetchAllMedicines(
+      myContext.userToken,
+    );
+    console.log('fetching all medicines');
+    setMedicines(allMedicines);
+  };
+
   useEffect(() => {
-    const fetchAllMedicines = async () => {
-      let allMedicines = await app.currentUser.functions.fetchAllMedicines(
-        myContext.userToken,
-      );
-      console.log('fetching all medicines');
-      setMedicines(allMedicines);
-    };
     if (isFocused) {
       fetchAllMedicines();
     }
@@ -94,6 +102,15 @@ export default function Medicines({navigation}) {
                   source={{uri: base64Icon}}
                 />
               )}
+              <IconButton
+                style={{
+                  minHeight: 20,
+                  minWidth: 40,
+                }}
+                icon="delete"
+                color="#D90429"
+                onPress={() => deleteRow(item)}
+              />
             </View>
           );
         }}

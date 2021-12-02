@@ -14,15 +14,22 @@ export default function Appointments({navigation}) {
   const myContext = useContext(AppContext);
   const app = getRealmApp();
 
+  const deleteRow = async item => {
+    let id = item._id;
+    await app.currentUser.functions.deleteAppointment({id}).then(async () => {
+      await fetchAllAppointments();
+    });
+  };
+
+  const fetchAllAppointments = async () => {
+    let allAppointments = await app.currentUser.functions.fetchAllAppointments(
+      myContext.userToken,
+    );
+    console.log('fetching all appointments');
+    setAppointments(allAppointments);
+  };
+
   useEffect(() => {
-    const fetchAllAppointments = async () => {
-      let allAppointments =
-        await app.currentUser.functions.fetchAllAppointments(
-          myContext.userToken,
-        );
-      console.log('fetching all appointments');
-      setAppointments(allAppointments);
-    };
     if (isFocused) {
       fetchAllAppointments();
     }
@@ -61,6 +68,18 @@ export default function Appointments({navigation}) {
                 <Text style={styles.text}>{String(item.details).trim()}</Text>
               </View>
             )}
+
+            <IconButton
+              style={{
+                position: 'absolute',
+                alignSelf: 'flex-end',
+                minHeight: 20,
+                minWidth: 40,
+              }}
+              icon="delete"
+              color="#D90429"
+              onPress={() => deleteRow(item)}
+            />
           </View>
         )}
       />
