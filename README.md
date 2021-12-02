@@ -1,2 +1,3 @@
-# minha_saude
- 
+#APLICAÇÃO MOBILE PARA GERENCIAMENTO E ORGANIZAÇÃO PESSOAL DE REGISTROS DE SAÚDE
+
+Trabalho de conclusão de curso - PUCRS 2021/2
