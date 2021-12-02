@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {LogBox} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import SecureStore from 'react-native-sensitive-info';
@@ -27,6 +28,7 @@ import {
 } from './src/pages';
 
 function App() {
+  LogBox.disableYellowBox = true;
   const [isLoading, setIsLoading] = useState(true);
   const [isSignout, setIsSignout] = useState(false);
   const [userToken, setUserToken] = useState('');
