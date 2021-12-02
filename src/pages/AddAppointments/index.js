@@ -22,7 +22,7 @@ export default function AddAppointments({navigation}) {
   const [time, setTime] = useState(date);
   const [address, setAddress] = useState('');
   const [details, setDetails] = useState('');
-  const [doctor, setDoctor] = useState();
+  const [doctor, setDoctor] = useState('');
   const [allDoctors, setAllDoctors] = useState([]);
   const app = getRealmApp();
   const myContext = useContext(AppContext);

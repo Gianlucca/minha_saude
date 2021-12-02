@@ -53,10 +53,16 @@ export default function Appointments({navigation}) {
               </Text>
             </View>
 
-            <View style={styles.detailRow}>
-              <IconButton style={styles.rowIcon} icon="city" color="#edf2f4" />
-              <Text style={styles.text}>{item.address}</Text>
-            </View>
+            {item.address !== '' && (
+              <View style={styles.detailRow}>
+                <IconButton
+                  style={styles.rowIcon}
+                  icon="city"
+                  color="#edf2f4"
+                />
+                <Text style={styles.text}>{item.address}</Text>
+              </View>
+            )}
 
             {item.details !== '' && (
               <View style={styles.detailRow}>

@@ -32,8 +32,6 @@ const styles = StyleSheet.create({
   picker: {
     flex: 1,
     marginTop: 15,
-    backgroundColor: '#eee',
-    color: '#888',
   },
   rowIcon: {
     justifyContent: 'flex-start',
