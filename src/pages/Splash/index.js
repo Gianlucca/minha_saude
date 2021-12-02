@@ -5,7 +5,7 @@ import styles from './styles.js';
 export default function Splash() {
   return (
     <View>
-      <Text>Loading...</Text>
+      <Text style={styles.header}>Loading...</Text>
     </View>
   );
 }

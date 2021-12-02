@@ -6,6 +6,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
   },
+  header: {
+    color: '#2b2d42',
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    marginTop: -15,
+  },
   row: {
     backgroundColor: '#9f9f9f',
     padding: 20,
