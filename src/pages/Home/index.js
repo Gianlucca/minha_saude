@@ -15,23 +15,29 @@ export default function Home({navigation}) {
   const myContext = useContext(AppContext);
   const app = getRealmApp();
 
-  const filter = item => {
+  const filterAppointments = item => {
     return moment() < moment(item.date);
   };
+  const filterMedicines = item => {
+    return moment() < moment(item.exp_date);
+  };
+
   useEffect(() => {
     const fetchAllAppointments = async () => {
       let allAppointments =
         await app.currentUser.functions.fetchAllAppointments(
           myContext.userToken,
         );
-      allAppointments = allAppointments.filter(filter);
+      allAppointments = allAppointments.filter(filterAppointments);
       console.log(allAppointments);
       setAppointments(allAppointments);
     };
+
     const fetchAllMedicines = async () => {
       let allMedicines = await app.currentUser.functions.fetchAllMedicines(
         myContext.userToken,
       );
+      allMedicines = allMedicines.filter(filterMedicines);
       console.log('fetching all medicines');
       setMedicines(allMedicines);
     };
